@@ -1,0 +1,7 @@
+[submodule "cogent"]
+	path = cogent
+	url = https://github.com/amblafont/cogent.git
+	branch = dargentfull
+[submodule "AutoCorres"]
+	path = AutoCorres
+	url = https://github.com/amblafont/AutoCorres.git
