@@ -622,11 +622,11 @@ static inline t6 *meson_stop_timer(t6 *a1)
     
     return r10;
 }
-t3 *reset_timer_e(t3 *arg)
+Meson_timer_reg *reset_timer_e(Meson_timer_reg *arg)
 {
     return reset_timer_e_cogent(arg);
 }
-t3 *config_get_regs(VAddr *vaddr)
+Meson_timer_reg *config_get_regs(VAddr *vaddr)
 {
     return (void *) ((uintptr_t) vaddr + (0xc1100000 + 0x2650 * 4 -
                                           0xc1109000));

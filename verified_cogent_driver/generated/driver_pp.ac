@@ -561,9 +561,9 @@ static inline t6 *meson_stop_timer(t6 *a1)
     t6 *r10 = r9;
     return r10;
 }
-$ty:(Meson_timer_reg) $id:reset_timer_e($ty:(Meson_timer_reg) arg) {
+Meson_timer_reg * reset_timer_e(Meson_timer_reg* arg) {
    return reset_timer_e_cogent(arg);
 }
-$ty:(Meson_timer_reg) config_get_regs(VAddr * vaddr) {
+Meson_timer_reg * config_get_regs(VAddr * vaddr) {
     return (void *) ((uintptr_t) vaddr + (0xc1100000 + 0x2650 * 4 - 0xc1109000));
 }

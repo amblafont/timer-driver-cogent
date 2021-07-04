@@ -10,10 +10,10 @@ typedef struct VAddr { int dummy ; }  VAddr;
 
 #include "driver.c"
 
-$ty:(Meson_timer_reg) $id:reset_timer_e($ty:(Meson_timer_reg) arg) {
+Meson_timer_reg * reset_timer_e(Meson_timer_reg* arg) {
    return reset_timer_e_cogent(arg);
 }
 
-$ty:(Meson_timer_reg) config_get_regs(VAddr * vaddr) {
+Meson_timer_reg * config_get_regs(VAddr * vaddr) {
     return (void *) ((uintptr_t) vaddr + (TIMER_BASE + TIMER_REG_START * 4 - TIMER_MAP_BASE));
 }
