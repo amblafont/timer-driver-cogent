@@ -19,9 +19,7 @@ layout LTimestamp_timebase = variant (3b) {
    TIMESTAMP_TIMEBASE_10_US (2) : 0b,
    TIMESTAMP_TIMEBASE_100_US(3) : 0b,
    TIMESTAMP_TIMEBASE_1_MS  (4) : 0b
--- TODO: remove this
-   -- , DUMMY (7) : 0b
- }
+ } at 8b
 
 type Timeout_timebase = 
   <  TIMEOUT_TIMEBASE_1_US 
@@ -36,7 +34,7 @@ layout LTimeout_timebase =
    , TIMEOUT_TIMEBASE_10_US (1) : 0b
    , TIMEOUT_TIMEBASE_100_US(2) : 0b
    , TIMEOUT_TIMEBASE_1_MS  (3) : 0b }
-   at 8b
+  
 
 
 type Meson_timer_reg = {
