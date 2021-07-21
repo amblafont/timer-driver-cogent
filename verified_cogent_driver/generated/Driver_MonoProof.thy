@@ -12,7 +12,7 @@ begin
 definition
   rename__assocs :: "(( string \<times>  Cogent.type list \<times>  Cogent.ptr_layout list) \<times>  string) list"
 where
-  "rename__assocs \<equiv> [((''config_get_regs'', Nil, Nil), ''config_get_regs''), ((''meson_get_time'', Nil, Nil), ''meson_get_time''), ((''meson_init'', Nil, Nil), ''meson_init''), ((''meson_set_timeout'', Nil, Nil), ''meson_set_timeout''), ((''meson_stop_timer'', Nil, Nil), ''meson_stop_timer''), ((''reset_timer_e'', Nil, Nil), ''reset_timer_e''), ((''reset_timer_e_cogent'', Nil, Nil), ''reset_timer_e_cogent'')]"
+  "rename__assocs \<equiv> [((''initialize'', Nil, Nil), ''initialize''), ((''meson_get_time'', Nil, Nil), ''meson_get_time''), ((''meson_set_timeout'', Nil, Nil), ''meson_set_timeout''), ((''meson_stop_timer'', Nil, Nil), ''meson_stop_timer''), ((''reset_timer_e'', Nil, Nil), ''reset_timer_e'')]"
 
 local_setup \<open>
 gen_mono_rename Cogent_functions @{thm rename__assocs_def} "rename"

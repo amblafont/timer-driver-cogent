@@ -10,7 +10,7 @@ imports "CogentShallow.Shallow_Normalisation_Tac"
 begin
 
 ML \<open>
-val Cogent_functions = ["reset_timer_e_cogent","meson_get_time","meson_init","meson_set_timeout","meson_stop_timer"]
+val Cogent_functions = ["reset_timer_e","initialize","meson_get_time","meson_set_timeout","meson_stop_timer"]
 \<close>
 
 ML \<open>

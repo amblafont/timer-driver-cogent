@@ -8,19 +8,19 @@ imports "Driver_ShallowShared"
 begin
 
 definition
-  reset_timer_e_cogent :: " Meson_timer_reg\<^sub>T \<Rightarrow>  Meson_timer_reg\<^sub>T"
+  reset_timer_e :: " Meson_timer_reg\<^sub>T \<Rightarrow>  Meson_timer_reg\<^sub>T"
 where
-  "reset_timer_e_cogent ds\<^sub>0 \<equiv> HOL.Let ds\<^sub>0 (\<lambda>r. Meson_timer_reg.timer_e\<^sub>f_update (\<lambda>_. (0 :: 32 word)) r)"
+  "reset_timer_e ds\<^sub>0 \<equiv> HOL.Let ds\<^sub>0 (\<lambda>r. Meson_timer_reg.timer_e_hi\<^sub>f_update (\<lambda>_. (0 :: 32 word)) (Meson_timer_reg.timer_e\<^sub>f_update (\<lambda>_. (0 :: 32 word)) r))"
+
+definition
+  initialize :: " Meson_timer\<^sub>T \<Rightarrow>  Meson_timer\<^sub>T"
+where
+  "initialize ds\<^sub>0 \<equiv> HOL.Let (take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t ds\<^sub>0 Meson_timer.regs\<^sub>f) (\<lambda>(regs,timer). Meson_timer.regs\<^sub>f_update (\<lambda>_. reset_timer_e (Meson_timer_reg.timer_e_input_clk\<^sub>f_update (\<lambda>_. (Timestamp_timebase.TIMESTAMP_TIMEBASE_1_US () ::  Timestamp_timebase\<^sub>T)) (Meson_timer_reg.timer_a_input_clk\<^sub>f_update (\<lambda>_. (Timeout_timebase.TIMEOUT_TIMEBASE_1_MS () ::  Timeout_timebase\<^sub>T)) regs))) timer)"
 
 definition
   meson_get_time :: " Meson_timer\<^sub>T \<Rightarrow> 64 word"
 where
   "meson_get_time ds\<^sub>0 \<equiv> HOL.Let ds\<^sub>0 (\<lambda>timer. HOL.Let (ucast (Meson_timer_reg.timer_e_hi\<^sub>f (Meson_timer.regs\<^sub>f timer)) :: 64 word) (\<lambda>initial_high. HOL.Let (ucast (Meson_timer_reg.timer_e\<^sub>f (Meson_timer.regs\<^sub>f timer)) :: 64 word) (\<lambda>low. HOL.Let (ucast (Meson_timer_reg.timer_e_hi\<^sub>f (Meson_timer.regs\<^sub>f timer)) :: 64 word) (\<lambda>high. HOL.Let (HOL.If ((~=) high initial_high) (ucast (Meson_timer_reg.timer_e\<^sub>f (Meson_timer.regs\<^sub>f timer)) :: 64 word) low) (\<lambda>low'. HOL.Let ((OR) (checked_shift shiftl high (32 :: 64 word)) low') (\<lambda>ticks. HOL.Let ((*) ticks (1000 :: 64 word)) (\<lambda>time. time)))))))"
-
-definition
-  meson_init :: "( Meson_timer\<^sub>T,  VAddr) T1 \<Rightarrow>  Meson_timer\<^sub>T"
-where
-  "meson_init ds\<^sub>0 \<equiv> HOL.Let (take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t ds\<^sub>0 T1.p1\<^sub>f) (\<lambda>(timer,ds\<^sub>1). HOL.Let (take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t ds\<^sub>1 T1.p2\<^sub>f) (\<lambda>(vaddr,ds\<^sub>2). HOL.Let (config_get_regs vaddr) (\<lambda>regs. Meson_timer.regs\<^sub>f_update (\<lambda>_. reset_timer_e (Meson_timer_reg.timer_e_input_clk\<^sub>f_update (\<lambda>_. (Timestamp_timebase.TIMESTAMP_TIMEBASE_1_US () ::  Timestamp_timebase\<^sub>T)) (Meson_timer_reg.timer_a_input_clk\<^sub>f_update (\<lambda>_. (Timeout_timebase.TIMEOUT_TIMEBASE_1_MS () ::  Timeout_timebase\<^sub>T)) regs))) timer)))"
 
 definition
   meson_set_timeout :: "( Meson_timer\<^sub>T, 16 word, bool) T0 \<Rightarrow>  Meson_timer\<^sub>T"

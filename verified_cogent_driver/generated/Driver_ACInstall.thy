@@ -10,8 +10,8 @@ begin
 declare [[record_codegen = false]]
 declare [[use_anonymous_local_variables=true]]
 new_C_include_dir "../../cogent/cogent/lib"
-install_C_file "driver_pp_inferred.c"
-autocorres [keep_going, ts_rules = nondet, no_opt, skip_word_abs] "driver_pp_inferred.c"
+install_C_file "driver.c"
+autocorres [keep_going, ts_rules = nondet, no_opt, skip_word_abs] "driver.c"
 
 end
 

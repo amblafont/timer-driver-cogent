@@ -29,27 +29,6 @@ structure ShallowTuplesThms_Driver =
 setup \<open> ShallowTuplesThms_Driver.setup \<close>
 
 
-overloading shallow_tuples_rel_T1 \<equiv> shallow_tuples_rel begin
-  definition "shallow_tuples_rel_T1 (x :: ('x1, 'x2) Driver_ShallowShared.T1) (xt :: 'xt1 \<times> 'xt2) \<equiv>
-    shallow_tuples_rel (Driver_ShallowShared.T1.p1\<^sub>f x) (prod.fst xt) \<and>
-    shallow_tuples_rel (Driver_ShallowShared.T1.p2\<^sub>f x) (prod.snd xt)"
-end
-lemma shallow_tuples_rule__T1_make [ShallowTuplesRules_Driver]:
-  "\<lbrakk>
-     shallow_tuples_rel x1 xt1;
-     shallow_tuples_rel x2 xt2
-  \<rbrakk> \<Longrightarrow> shallow_tuples_rel (Driver_ShallowShared.T1.make x1 x2) (xt1, xt2)"
-  by (simp add: shallow_tuples_rel_T1_def Driver_ShallowShared.T1.defs Px_px)
-lemma shallow_tuples_rule__T1__p1\<^sub>f [ShallowTuplesThms_Driver]:
-  "shallow_tuples_rel (x :: ('x1, 'x2) Driver_ShallowShared.T1) (xt :: 'xt1 \<times> 'xt2) \<Longrightarrow>
-   shallow_tuples_rel (Driver_ShallowShared.T1.p1\<^sub>f x) (prod.fst xt)"
-  by (simp add: shallow_tuples_rel_T1_def)
-lemma shallow_tuples_rule__T1__p2\<^sub>f [ShallowTuplesThms_Driver]:
-  "shallow_tuples_rel (x :: ('x1, 'x2) Driver_ShallowShared.T1) (xt :: 'xt1 \<times> 'xt2) \<Longrightarrow>
-   shallow_tuples_rel (Driver_ShallowShared.T1.p2\<^sub>f x) (prod.snd xt)"
-  by (simp add: shallow_tuples_rel_T1_def)
-
-
 overloading shallow_tuples_rel_T0 \<equiv> shallow_tuples_rel begin
   definition "shallow_tuples_rel_T0 (x :: ('x1, 'x2, 'x3) Driver_ShallowShared.T0) (xt :: 'xt1 \<times> 'xt2 \<times> 'xt3) \<equiv>
     shallow_tuples_rel (Driver_ShallowShared.T0.p1\<^sub>f x) (prod.fst xt) \<and>
@@ -279,20 +258,20 @@ lemma shallow_tuples_rule__Timestamp_timebase__TIMESTAMP_TIMEBASE_SYSTEM [Shallo
   by (simp add: shallow_tuples_rel_Timestamp_timebase_def)
 
 
-lemma shallow_tuples__config_get_regs [ShallowTuplesThms_Driver]:
-  "shallow_tuples_rel Driver_ShallowShared.config_get_regs Driver_ShallowShared_Tuples.config_get_regs"
-  sorry
-
-
 lemma shallow_tuples__reset_timer_e [ShallowTuplesThms_Driver]:
-  "shallow_tuples_rel Driver_ShallowShared.reset_timer_e Driver_ShallowShared_Tuples.reset_timer_e"
-  sorry
-
-
-lemma shallow_tuples__reset_timer_e_cogent [ShallowTuplesThms_Driver]:
-  "shallow_tuples_rel Driver_Shallow_Desugar.reset_timer_e_cogent Driver_Shallow_Desugar_Tuples.reset_timer_e_cogent"
+  "shallow_tuples_rel Driver_Shallow_Desugar.reset_timer_e Driver_Shallow_Desugar_Tuples.reset_timer_e"
   apply (rule shallow_tuples_rel_funI)
-  apply (unfold Driver_Shallow_Desugar.reset_timer_e_cogent_def Driver_Shallow_Desugar_Tuples.reset_timer_e_cogent_def id_def)
+  apply (unfold Driver_Shallow_Desugar.reset_timer_e_def Driver_Shallow_Desugar_Tuples.reset_timer_e_def id_def)
+  apply ((unfold take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def Let_def split_def)?,(simp only: fst_conv snd_conv)?)
+  by (assumption |
+      rule shallow_tuples_basic_bucket ShallowTuplesRules_Driver
+           ShallowTuplesThms_Driver ShallowTuplesThms_Driver[THEN shallow_tuples_rel_funD])+
+
+
+lemma shallow_tuples__initialize [ShallowTuplesThms_Driver]:
+  "shallow_tuples_rel Driver_Shallow_Desugar.initialize Driver_Shallow_Desugar_Tuples.initialize"
+  apply (rule shallow_tuples_rel_funI)
+  apply (unfold Driver_Shallow_Desugar.initialize_def Driver_Shallow_Desugar_Tuples.initialize_def id_def)
   apply ((unfold take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def Let_def split_def)?,(simp only: fst_conv snd_conv)?)
   by (assumption |
       rule shallow_tuples_basic_bucket ShallowTuplesRules_Driver
@@ -303,16 +282,6 @@ lemma shallow_tuples__meson_get_time [ShallowTuplesThms_Driver]:
   "shallow_tuples_rel Driver_Shallow_Desugar.meson_get_time Driver_Shallow_Desugar_Tuples.meson_get_time"
   apply (rule shallow_tuples_rel_funI)
   apply (unfold Driver_Shallow_Desugar.meson_get_time_def Driver_Shallow_Desugar_Tuples.meson_get_time_def id_def)
-  apply ((unfold take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def Let_def split_def)?,(simp only: fst_conv snd_conv)?)
-  by (assumption |
-      rule shallow_tuples_basic_bucket ShallowTuplesRules_Driver
-           ShallowTuplesThms_Driver ShallowTuplesThms_Driver[THEN shallow_tuples_rel_funD])+
-
-
-lemma shallow_tuples__meson_init [ShallowTuplesThms_Driver]:
-  "shallow_tuples_rel Driver_Shallow_Desugar.meson_init Driver_Shallow_Desugar_Tuples.meson_init"
-  apply (rule shallow_tuples_rel_funI)
-  apply (unfold Driver_Shallow_Desugar.meson_init_def Driver_Shallow_Desugar_Tuples.meson_init_def id_def)
   apply ((unfold take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def Let_def split_def)?,(simp only: fst_conv snd_conv)?)
   by (assumption |
       rule shallow_tuples_basic_bucket ShallowTuplesRules_Driver

@@ -81,7 +81,7 @@ fold (fn (f, thm) => Utils.define_lemmas (f ^ "_normalised") [thm] #> snd)
 
 (* Initialise final locale. *)
 locale Driver_cogent_shallow =
-  "driver_pp_inferred" + correspondence +
+  "driver" + correspondence +
   constrains val_abs_typing :: "'b \<Rightarrow> name \<Rightarrow> type list \<Rightarrow> bool"
          and upd_abs_typing :: "abstyp \<Rightarrow> name \<Rightarrow> type list \<Rightarrow> sigil \<Rightarrow> ptrtyp set \<Rightarrow> ptrtyp set \<Rightarrow> bool"
          and abs_repr       :: "abstyp \<Rightarrow> name \<times> repr list"

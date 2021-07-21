@@ -16,12 +16,6 @@ begin
 end
 
 overloading
-  valRel_T1 \<equiv> valRel
-begin
-  definition valRel_T1: "\<And>\<xi> x v. valRel_T1 \<xi> (x :: ('t_p1, 't_p2) T1) v \<equiv> \<exists>f_p1 f_p2. v = VRecord [f_p1, f_p2] \<and> valRel \<xi> (T1.p1\<^sub>f x) f_p1 \<and> valRel \<xi> (T1.p2\<^sub>f x) f_p2"
-end
-
-overloading
   valRel_Meson_timer \<equiv> valRel
 begin
   definition valRel_Meson_timer: "\<And>\<xi> x v. valRel_Meson_timer \<xi> (x :: ('t_regs, 't_disable) Meson_timer) v \<equiv> \<exists>f_regs f_disable. v = VRecord [f_regs, f_disable] \<and> valRel \<xi> (Meson_timer.regs\<^sub>f x) f_regs \<and> valRel \<xi> (Meson_timer.disable\<^sub>f x) f_disable"
@@ -93,8 +87,6 @@ lemma valRel_Timestamp_timebase_TIMESTAMP_TIMEBASE_SYSTEM[simp] :
 lemmas valRel_records =
   valRel_T0
   T0.defs
-  valRel_T1
-  T1.defs
   valRel_Meson_timer
   Meson_timer.defs
   valRel_Meson_timer_reg
@@ -131,14 +123,6 @@ lemma scorres_struct_T0 :
   apply (clarsimp simp: scorres_def valRel_T0 T0.defs elim!: v_sem_elims)
   done
 
-lemma scorres_struct_T1 :
-  "\<And>\<gamma> \<xi> s_p1 s_p2 d_p1 d_p2.
-  scorres s_p1 d_p1 \<gamma> \<xi> \<Longrightarrow>
-  scorres s_p2 d_p2 \<gamma> \<xi> \<Longrightarrow>
-  scorres (T1.make s_p1 s_p2) (Struct ts [d_p1, d_p2]) \<gamma> \<xi>"
-  apply (clarsimp simp: scorres_def valRel_T1 T1.defs elim!: v_sem_elims)
-  done
-
 lemma scorres_struct_Meson_timer :
   "\<And>\<gamma> \<xi> s_regs s_disable d_regs d_disable.
   scorres s_regs d_regs \<gamma> \<xi> \<Longrightarrow>
@@ -162,7 +146,6 @@ lemma scorres_struct_Meson_timer_reg :
 
 lemmas scorres_structs =
   scorres_struct_T0
-  scorres_struct_T1
   scorres_struct_Meson_timer
   scorres_struct_Meson_timer_reg
 
@@ -179,16 +162,6 @@ lemma shallow_tac_rec_field_T0__p2 :
 lemma shallow_tac_rec_field_T0__p3 :
   "shallow_tac_rec_field \<xi> (T0.p3\<^sub>f :: ('t_p1, 't_p2, 't_p3) T0 \<Rightarrow> 't_p3) T0.p3\<^sub>f_update 2"
   apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_T0)
-  done
-
-lemma shallow_tac_rec_field_T1__p1 :
-  "shallow_tac_rec_field \<xi> (T1.p1\<^sub>f :: ('t_p1, 't_p2) T1 \<Rightarrow> 't_p1) T1.p1\<^sub>f_update 0"
-  apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_T1)
-  done
-
-lemma shallow_tac_rec_field_T1__p2 :
-  "shallow_tac_rec_field \<xi> (T1.p2\<^sub>f :: ('t_p1, 't_p2) T1 \<Rightarrow> 't_p2) T1.p2\<^sub>f_update 1"
-  apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_T1)
   done
 
 lemma shallow_tac_rec_field_Meson_timer__regs :
@@ -240,8 +213,6 @@ lemmas scorres_rec_fields =
   shallow_tac_rec_field_T0__p1
   shallow_tac_rec_field_T0__p2
   shallow_tac_rec_field_T0__p3
-  shallow_tac_rec_field_T1__p1
-  shallow_tac_rec_field_T1__p2
   shallow_tac_rec_field_Meson_timer__regs
   shallow_tac_rec_field_Meson_timer__disable
   shallow_tac_rec_field_Meson_timer_reg__timer_a_en

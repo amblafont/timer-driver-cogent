@@ -59,29 +59,23 @@ type Meson_timer_reg = {
 -- the timer_e_hi register would then be updated as well
 -- by the device
 reset_timer_e : Meson_timer_reg -> Meson_timer_reg
-
--- we don't use directly the cogent version
--- because the shallow embedding would ignore 
--- the volatile behaviour described above.
-reset_timer_e_cogent : Meson_timer_reg -> Meson_timer_reg
-reset_timer_e_cogent r = r { timer_e = 0 }
+reset_timer_e r = 
+   r { timer_e = 0,
+-- The following line is not necessary because the 
+-- device automatically resets the higher register
+-- but for the purpose of verification it is useful
+-- to keep it
+       timer_e_hi = 0}
 
 type Meson_timer = { 
   regs : Meson_timer_reg,
   disable : Bool
 }
 
--- instead of Meson_timer_config, we use VAddr as abstract type
--- it avoids unboxed abstract type in meson_init
-type VAddr
-
--- (void *)((uintptr_t) config.vaddr + (TIMER_BASE + TIMER_REG_START * 4 - TIMER_MAP_BASE));
-config_get_regs : VAddr -> Meson_timer_reg
 
 -- assume given non-null pointers?
-meson_init : (Meson_timer take regs, VAddr) -> Meson_timer
-meson_init (timer, vaddr) =
-  let regs = config_get_regs vaddr in 
+initialize : Meson_timer -> Meson_timer
+initialize timer { regs } =
     timer { regs = reset_timer_e ( 
         regs { 
             -- the original C driver enables the timer A
@@ -100,6 +94,7 @@ meson_get_time timer =
   let high : U64 = upcast timer.regs.timer_e_hi in
   -- this is a trick to check that overflow did not happen
   -- it does not make sense without the volatile annotation of course
+  -- or with the cogent semantics (so this trick is not formally "verified")
   let low' : U64 = if high /= initial_high then upcast timer.regs.timer_e else low in
   let ticks : U64 = (high << 32) .|. low' in
   let time : U64 = ticks * ns_in_us in 

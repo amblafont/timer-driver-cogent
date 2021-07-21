@@ -6,36 +6,29 @@ begin
 fun curry_triple :: "(('a, 'b, 'c) T0 \<Rightarrow> 'z) \<Rightarrow> ('a \<Rightarrow> 'b \<Rightarrow> 'c \<Rightarrow> 'z)" where
   "curry_triple f a b c = f (\<lparr> T0.p1\<^sub>f = a, p2\<^sub>f = b, p3\<^sub>f = c \<rparr>)"
 
-fun curry_pair :: "(('a, 'b) T1 \<Rightarrow> 'c) \<Rightarrow> ('a \<Rightarrow> 'b \<Rightarrow> 'c)" where
-  "curry_pair f a b = f (\<lparr> T1.p1\<^sub>f = a, p2\<^sub>f = b \<rparr>)"
 
 type_synonym concr_device_state = "Meson_timer_reg\<^sub>T"
 type_synonym concr_state = "Meson_timer\<^sub>T"
 
-axiomatization
-  where  reset_timer_e_def : "reset_timer_e reg =
-      reg \<lparr> timer_e_hi\<^sub>f := 0, timer_e\<^sub>f := 0 \<rparr>
-     "
-
-definition concr_driver :: "(concr_state, VAddr, 64 word, 16 word, bool) driver"
+definition concr_driver :: "(concr_state, 64 word, 16 word, bool) driver"
   where
   "concr_driver = 
 \<lparr> 
   get_time = meson_get_time,
-  init = curry_pair meson_init,
+  initialize = initialize,
   stop_timer = meson_stop_timer,
   set_timeout = curry_triple meson_set_timeout,
 \<comment> \<open>we are going to multiply it by 1000 (\<approx> 1024 = 2^10) \<close>
-  stateInv = (\<lambda>s. timer_e_hi\<^sub>f (regs\<^sub>f s) < 2^(32-10)
+    stateInv = (\<lambda>s. timer_e_hi\<^sub>f (regs\<^sub>f s) < 2^(32-10)
              \<and>  disable\<^sub>f s = Not (timer_a_en\<^sub>f (regs\<^sub>f s)) ),
-  iniDeviceInv = (\<lambda>s r. (disable\<^sub>f s = True \<and> Not (timer_a_en\<^sub>f (config_get_regs r))))
+iniDeviceInv = (\<lambda>s. (disable\<^sub>f s = True \<and> Not (timer_a_en\<^sub>f (regs\<^sub>f s))))
+  
 \<rparr>
 "
 
-
 locale concr_is_refinement = 
   is_refinement concr_driver mor
-  for mor :: "(concr_state, VAddr, 64 word, 16 word, bool) driver_abstr"
+  for mor :: "(concr_state, 64 word, 16 word, bool) driver_abstr"
 
   
 
@@ -77,11 +70,10 @@ definition \<alpha>_state :: "concr_state \<Rightarrow> abstr_state" where
     deviceState = \<alpha>_reg (regs\<^sub>f s)
   \<rparr>"
 
-definition abstraction :: "(concr_state, VAddr, 64 word, 16 word, bool) driver_abstr"
+definition abstraction :: "(concr_state, 64 word, 16 word, bool) driver_abstr"
   where "abstraction = 
   \<lparr>
    mor_state = \<alpha>_state,
-   mor_reg = \<alpha>_reg o config_get_regs,
    mor_time = unat, 
    mor_timeout = unat,
    mor_timer_mode = \<alpha>_timer_mode 
@@ -145,7 +137,7 @@ interpretation concr_implementation:
      apply simp
 
 
-    apply (simp add:simp_defs meson_init_def meson_get_time_def ns_in_us_def
+    apply (simp add:simp_defs initialize_def meson_get_time_def ns_in_us_def
   reset_timer_e_def)
      apply(case_tac s, rename_tac regs disable, case_tac regs)
     apply(simp add: take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
@@ -162,10 +154,10 @@ interpretation concr_implementation:
      apply(simp add:unat_ucast_up)
 
 (* invariants *)
-    apply(simp add:simp_defs meson_init_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def reset_timer_e_def)
+    apply(simp add:simp_defs initialize_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def reset_timer_e_def)
      apply(simp add:simp_defs  meson_stop_timer_def  ns_in_us_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
 
-    apply(simp add:simp_defs meson_init_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def reset_timer_e_def)
+    apply(simp add:simp_defs initialize_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def reset_timer_e_def)
    apply(simp add:simp_defs  meson_stop_timer_def  ns_in_us_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
 
   apply(simp add:simp_defs  meson_set_timeout_def  take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def)

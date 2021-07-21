@@ -8,12 +8,29 @@ imports "Driver_ShallowShared_Tuples"
 begin
 
 definition
-  reset_timer_e_cogent :: " Meson_timer_reg\<^sub>T \<Rightarrow>  Meson_timer_reg\<^sub>T"
+  reset_timer_e :: " Meson_timer_reg\<^sub>T \<Rightarrow>  Meson_timer_reg\<^sub>T"
 where
-  "reset_timer_e_cogent ds\<^sub>0 \<equiv>
-    ds\<^sub>0
-      \<lparr>Meson_timer_reg.timer_e\<^sub>f :=
-        (0 :: 32 word)\<rparr>"
+  "reset_timer_e ds\<^sub>0 \<equiv>
+    ds\<^sub>0 \<lparr>
+      Meson_timer_reg.timer_e\<^sub>f :=
+        (0 :: 32 word),
+      Meson_timer_reg.timer_e_hi\<^sub>f :=
+        (0 :: 32 word)
+      \<rparr>"
+
+definition
+  initialize :: " Meson_timer\<^sub>T \<Rightarrow>  Meson_timer\<^sub>T"
+where
+  "initialize ds\<^sub>0 \<equiv>
+    let regs = Meson_timer.regs\<^sub>f ds\<^sub>0
+    in ds\<^sub>0
+        \<lparr>Meson_timer.regs\<^sub>f :=
+          reset_timer_e (regs \<lparr>
+            Meson_timer_reg.timer_a_input_clk\<^sub>f :=
+              (Timeout_timebase.TIMEOUT_TIMEBASE_1_MS () ::  Timeout_timebase\<^sub>T),
+            Meson_timer_reg.timer_e_input_clk\<^sub>f :=
+              (Timestamp_timebase.TIMESTAMP_TIMEBASE_1_US () ::  Timestamp_timebase\<^sub>T)
+            \<rparr>)\<rparr>"
 
 definition
   meson_get_time :: " Meson_timer\<^sub>T \<Rightarrow> 64 word"
@@ -28,21 +45,6 @@ where
       ticks = (OR) (checked_shift shiftl high (32 :: 64 word)) low';
       time = (*) ticks (1000 :: 64 word)
     in time"
-
-definition
-  meson_init :: " Meson_timer\<^sub>T \<times>  VAddr \<Rightarrow>  Meson_timer\<^sub>T"
-where
-  "meson_init ds\<^sub>0 \<equiv>
-    let (timer,vaddr) = ds\<^sub>0;
-      regs = config_get_regs vaddr
-    in timer
-        \<lparr>Meson_timer.regs\<^sub>f :=
-          reset_timer_e (regs \<lparr>
-            Meson_timer_reg.timer_a_input_clk\<^sub>f :=
-              (Timeout_timebase.TIMEOUT_TIMEBASE_1_MS () ::  Timeout_timebase\<^sub>T),
-            Meson_timer_reg.timer_e_input_clk\<^sub>f :=
-              (Timestamp_timebase.TIMESTAMP_TIMEBASE_1_US () ::  Timestamp_timebase\<^sub>T)
-            \<rparr>)\<rparr>"
 
 definition
   meson_set_timeout :: " Meson_timer\<^sub>T \<times> 16 word \<times> bool \<Rightarrow>  Meson_timer\<^sub>T"

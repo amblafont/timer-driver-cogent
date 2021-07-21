@@ -8,8 +8,6 @@ imports "Cogent.Util"
 "CogentShallow.ShallowUtil"
 begin
 
-typedecl  VAddr
-
 record ('a, 'b) Meson_timer =
   regs\<^sub>f :: "'a"
   disable\<^sub>f :: "'b"
@@ -43,9 +41,5 @@ type_synonym  Timeout_timebase\<^sub>T = "(unit, unit, unit, unit) Timeout_timeb
 type_synonym  Meson_timer_reg\<^sub>T = "(bool, 32 word, bool,  Timeout_timebase\<^sub>T, 32 word, 32 word,  Timestamp_timebase\<^sub>T) Meson_timer_reg"
 
 type_synonym  Meson_timer\<^sub>T = "( Meson_timer_reg\<^sub>T, bool) Meson_timer"
-
-consts config_get_regs :: " VAddr \<Rightarrow>  Meson_timer_reg\<^sub>T"
-
-consts reset_timer_e :: " Meson_timer_reg\<^sub>T \<Rightarrow>  Meson_timer_reg\<^sub>T"
 
 end

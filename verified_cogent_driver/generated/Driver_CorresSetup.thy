@@ -57,19 +57,19 @@ class cogent_C_heap = cogent_C_val +
   fixes heap        :: "lifted_globals \<Rightarrow> 'a ptr \<Rightarrow> 'a"
 (* generate direct definitions of custom getter/setters (for custom layouts) by
    inspecting their monadic definitions *)
-setup \<open> generate_isa_getset_records_for_file "driver_pp_inferred.c" @{locale driver_pp_inferred} \<close>
-local_setup \<open> local_setup_val_rel_type_rel_put_them_in_buckets "driver_pp_inferred.c" \<close>
-local_setup \<open> local_setup_instantiate_cogent_C_heaps_store_them_in_buckets "driver_pp_inferred.c" \<close>
-locale Driver = "driver_pp_inferred" + update_sem_init
+setup \<open> generate_isa_getset_records_for_file "driver.c" @{locale driver} \<close>
+local_setup \<open> local_setup_val_rel_type_rel_put_them_in_buckets "driver.c" \<close>
+local_setup \<open> local_setup_instantiate_cogent_C_heaps_store_them_in_buckets "driver.c" \<close>
+locale Driver = "driver" + update_sem_init
 begin
 
 
 (* The get/set lemmas that must be proven *)
-ML \<open>val lems = mk_getset_lems "driver_pp_inferred.c" @{context} \<close>
+ML \<open>val lems = mk_getset_lems "driver.c" @{context} \<close>
 ML \<open>lems  |> map (string_of_getset_lem @{context})|> map tracing\<close>
 
 (* This proves the get/set lemmas *)
-local_setup \<open>local_setup_getset_lemmas "driver_pp_inferred.c" \<close>
+local_setup \<open>local_setup_getset_lemmas "driver.c" \<close>
 
 
 (* Relation between program heaps *)
@@ -89,7 +89,7 @@ lemma heap_rel_ptr_meta:
   "heap_rel_ptr = heap_rel_meta is_valid heap"
   by (simp add: heap_rel_ptr_def[abs_def] heap_rel_meta_def[abs_def])
 
-local_setup \<open> local_setup_heap_rel "driver_pp_inferred.c" \<close>
+local_setup \<open> local_setup_heap_rel "driver.c" \<close>
 
 definition state_rel :: "((funtyp, abstyp, ptrtyp) store \<times> lifted_globals) set"
 where
@@ -97,7 +97,7 @@ where
 
 (* Generating the specialised take and put lemmas *)
 
-local_setup \<open> local_setup_take_put_member_case_esac_specialised_lemmas "driver_pp_inferred.c" \<close>
+local_setup \<open> local_setup_take_put_member_case_esac_specialised_lemmas "driver.c" \<close>
 local_setup \<open> fold tidy_C_fun_def' Cogent_functions \<close>
 
 end (* of locale *)

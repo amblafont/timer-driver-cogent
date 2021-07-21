@@ -10,12 +10,12 @@ begin
 definition
   abbreviatedType1 :: " Cogent.type"
 where
-  "abbreviatedType1 \<equiv> TRecord [(''regs'', (TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (TSum [(''TIMEOUT_TIMEBASE_100_US'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_10_US'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_US'', (TUnit, Unchecked))], Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (TSum [(''TIMESTAMP_TIMEBASE_100_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_10_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_1_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_SYSTEM'', (TUnit, Unchecked))], Present))] (Boxed Writable (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 8) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 0) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])]))), Present)), (''disable'', (TPrim Bool, Present))] (Boxed Writable None)"
+  "abbreviatedType1 \<equiv> TRecord [(''regs'', (TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (TSum [(''TIMEOUT_TIMEBASE_100_US'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_10_US'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_US'', (TUnit, Unchecked))], Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (TSum [(''TIMESTAMP_TIMEBASE_100_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_10_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_1_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_SYSTEM'', (TUnit, Unchecked))], Present))] (Boxed Writable (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 0) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 8) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])]))), Present)), (''disable'', (TPrim Bool, Present))] (Boxed Writable None)"
 
 definition
   abbreviatedType2 :: " Cogent.type"
 where
-  "abbreviatedType2 \<equiv> TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (TSum [(''TIMEOUT_TIMEBASE_100_US'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_10_US'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_US'', (TUnit, Unchecked))], Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (TSum [(''TIMESTAMP_TIMEBASE_100_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_10_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_1_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_SYSTEM'', (TUnit, Unchecked))], Present))] (Boxed Writable (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 8) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 0) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])])))"
+  "abbreviatedType2 \<equiv> TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (TSum [(''TIMEOUT_TIMEBASE_100_US'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_10_US'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_US'', (TUnit, Unchecked))], Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (TSum [(''TIMESTAMP_TIMEBASE_100_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_10_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_1_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_SYSTEM'', (TUnit, Unchecked))], Present))] (Boxed Writable (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 0) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 8) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])])))"
 
 definition
   abbreviatedType3 :: " Cogent.type"
@@ -30,12 +30,12 @@ where
 definition
   abbreviatedType5 :: " Cogent.type"
 where
-  "abbreviatedType5 \<equiv> TRecord [(''regs'', (TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (abbreviatedType4, Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (abbreviatedType3, Present))] (Boxed Writable (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 8) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 0) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])]))), Present)), (''disable'', (TPrim Bool, Present))] (Boxed Writable None)"
+  "abbreviatedType5 \<equiv> TRecord [(''regs'', (TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (abbreviatedType4, Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (abbreviatedType3, Present))] (Boxed Writable (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 0) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 8) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])]))), Present)), (''disable'', (TPrim Bool, Present))] (Boxed Writable None)"
 
 definition
   abbreviatedType6 :: " Cogent.type"
 where
-  "abbreviatedType6 \<equiv> TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (abbreviatedType4, Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (abbreviatedType3, Present))] (Boxed Writable (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 8) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 0) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])])))"
+  "abbreviatedType6 \<equiv> TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (abbreviatedType4, Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (abbreviatedType3, Present))] (Boxed Writable (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 0) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 8) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])])))"
 
 definition
   abbreviatedType7 :: " Cogent.type"
@@ -50,41 +50,24 @@ where
 definition
   abbreviatedType9 :: " Cogent.type"
 where
-  "abbreviatedType9 \<equiv> TRecord [(''p1'', (TRecord [(''regs'', (abbreviatedType6, Taken)), (''disable'', (TPrim Bool, Present))] (Boxed Writable None), Present)), (''p2'', (TCon ''VAddr'' [] (Boxed Writable None), Present))] Unboxed"
+  "abbreviatedType9 \<equiv> TRecord [(''regs'', (TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (abbreviatedType4, Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (abbreviatedType3, Present))] (Boxed ReadOnly (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 0) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 8) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])]))), Present)), (''disable'', (TPrim Bool, Present))] (Boxed ReadOnly None)"
 
 definition
   abbreviatedType10 :: " Cogent.type"
 where
-  "abbreviatedType10 \<equiv> TRecord [(''regs'', (abbreviatedType6, Taken)), (''disable'', (TPrim Bool, Present))] (Boxed Writable None)"
-
-definition
-  abbreviatedType11 :: " Cogent.type"
-where
-  "abbreviatedType11 \<equiv> TRecord [(''regs'', (TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (abbreviatedType4, Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (abbreviatedType3, Present))] (Boxed ReadOnly (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 8) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 0) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])]))), Present)), (''disable'', (TPrim Bool, Present))] (Boxed ReadOnly None)"
-
-definition
-  abbreviatedType12 :: " Cogent.type"
-where
-  "abbreviatedType12 \<equiv> TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (abbreviatedType4, Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (abbreviatedType3, Present))] (Boxed ReadOnly (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 8) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 0) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])])))"
+  "abbreviatedType10 \<equiv> TRecord [(''timer_a_en'', (TPrim Bool, Present)), (''timer_a'', (TPrim (Num U32), Present)), (''timer_a_mode'', (TPrim Bool, Present)), (''timer_a_input_clk'', (abbreviatedType4, Present)), (''timer_e'', (TPrim (Num U32), Present)), (''timer_e_hi'', (TPrim (Num U32), Present)), (''timer_e_input_clk'', (abbreviatedType3, Present))] (Boxed ReadOnly (Some (LayRecord [(''timer_a'', LayBitRange (32, 32)), (''timer_a_en'', LayBitRange (Suc 0, 15)), (''timer_a_input_clk'', LayVariant (2, 0) [(''TIMEOUT_TIMEBASE_100_US'', 2, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_10_US'', Suc 0, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_MS'', 3, LayBitRange (0, 0)), (''TIMEOUT_TIMEBASE_1_US'', 0, LayBitRange (0, 0))]), (''timer_a_mode'', LayBitRange (Suc 0, 11)), (''timer_e'', LayBitRange (32, 576)), (''timer_e_hi'', LayBitRange (32, 608)), (''timer_e_input_clk'', LayVariant (3, 8) [(''TIMESTAMP_TIMEBASE_100_US'', 3, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_10_US'', 2, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_MS'', 4, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_1_US'', Suc 0, LayBitRange (0, 0)), (''TIMESTAMP_TIMEBASE_SYSTEM'', 0, LayBitRange (0, 0))])])))"
 
 lemmas abbreviated_type_defs =
   abbreviatedType4_def
   abbreviatedType3_def
   abbreviatedType8_def
-  abbreviatedType9_def
   abbreviatedType7_def
-  abbreviatedType10_def
-  abbreviatedType11_def
+  abbreviatedType9_def
   abbreviatedType5_def
   abbreviatedType1_def
-  abbreviatedType12_def
+  abbreviatedType10_def
   abbreviatedType6_def
   abbreviatedType2_def
-
-definition
-  config_get_regs_type :: " poly_type"
-where
-  "config_get_regs_type \<equiv> (0, [], {}, TCon ''VAddr'' [] (Boxed Writable None), abbreviatedType6)"
 
 definition
   reset_timer_e_type :: " poly_type"
@@ -92,34 +75,29 @@ where
   "reset_timer_e_type \<equiv> (0, [], {}, abbreviatedType6, abbreviatedType6)"
 
 definition
-  reset_timer_e_cogent_type :: " poly_type"
+  reset_timer_e :: "string Cogent.expr"
 where
-  "reset_timer_e_cogent_type \<equiv> (0, [], {}, abbreviatedType6, abbreviatedType6)"
+  "reset_timer_e \<equiv> Let (Var 0) (Let (Lit (LU32 0)) (Let (Put (Var 1) 4 (Var 0)) (Let (Lit (LU32 0)) (Put (Var 1) 5 (Var 0)))))"
 
 definition
-  reset_timer_e_cogent :: "string Cogent.expr"
+  initialize_type :: " poly_type"
 where
-  "reset_timer_e_cogent \<equiv> Let (Var 0) (Let (Lit (LU32 0)) (Put (Var 1) 4 (Var 0)))"
+  "initialize_type \<equiv> (0, [], {}, abbreviatedType7, abbreviatedType7)"
+
+definition
+  initialize :: "string Cogent.expr"
+where
+  "initialize \<equiv> Take (Var 0) 0 (Let Unit (Let (Con [(''TIMEOUT_TIMEBASE_100_US'', (TUnit, Checked)), (''TIMEOUT_TIMEBASE_10_US'', (TUnit, Checked)), (''TIMEOUT_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_US'', (TUnit, Checked))] ''TIMEOUT_TIMEBASE_1_MS'' (Var 0)) (Let (Promote abbreviatedType4 (Var 0)) (Let (Put (Var 3) 3 (Var 0)) (Let Unit (Let (Con [(''TIMESTAMP_TIMEBASE_100_US'', (TUnit, Checked)), (''TIMESTAMP_TIMEBASE_10_US'', (TUnit, Checked)), (''TIMESTAMP_TIMEBASE_1_MS'', (TUnit, Checked)), (''TIMESTAMP_TIMEBASE_1_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_SYSTEM'', (TUnit, Checked))] ''TIMESTAMP_TIMEBASE_1_US'' (Var 0)) (Let (Promote abbreviatedType3 (Var 0)) (Let (Put (Var 3) 6 (Var 0)) (Let (App (Fun reset_timer_e [] []) (Var 0)) (Put (Var 10) 0 (Var 0)))))))))))"
 
 definition
   meson_get_time_type :: " poly_type"
 where
-  "meson_get_time_type \<equiv> (0, [], {}, TRecord [(''regs'', (abbreviatedType12, Present)), (''disable'', (TPrim Bool, Present))] (Boxed ReadOnly None), TPrim (Num U64))"
+  "meson_get_time_type \<equiv> (0, [], {}, TRecord [(''regs'', (abbreviatedType10, Present)), (''disable'', (TPrim Bool, Present))] (Boxed ReadOnly None), TPrim (Num U64))"
 
 definition
   meson_get_time :: "string Cogent.expr"
 where
   "meson_get_time \<equiv> Let (Var 0) (Let (Member (Var 0) 0) (Let (Member (Var 0) 5) (Let (Cast U64 (Var 0)) (Let (Member (Var 3) 0) (Let (Member (Var 0) 4) (Let (Cast U64 (Var 0)) (Let (Member (Var 6) 0) (Let (Member (Var 0) 5) (Let (Cast U64 (Var 0)) (Let (Prim (NEq (Num U64)) [Var 0, Var 6]) (If (Var 0) (Let (Member (Var 10) 0) (Let (Member (Var 0) 4) (Let (Cast U64 (Var 0)) (Let (Lit (LU64 32)) (Let (Prim (LShift U64) [Var 5, Var 0]) (Let (Prim (BitOr U64) [Var 0, Var 2]) (Let (Lit (LU64 1000)) (Let (Prim (Times U64) [Var 1, Var 0]) (Var 0))))))))) (Let (Var 4) (Let (Lit (LU64 32)) (Let (Prim (LShift U64) [Var 3, Var 0]) (Let (Prim (BitOr U64) [Var 0, Var 2]) (Let (Lit (LU64 1000)) (Let (Prim (Times U64) [Var 1, Var 0]) (Var 0))))))))))))))))))"
-
-definition
-  meson_init_type :: " poly_type"
-where
-  "meson_init_type \<equiv> (0, [], {}, TRecord [(''p1'', (abbreviatedType10, Present)), (''p2'', (TCon ''VAddr'' [] (Boxed Writable None), Present))] Unboxed, abbreviatedType7)"
-
-definition
-  meson_init :: "string Cogent.expr"
-where
-  "meson_init \<equiv> Take (Var 0) 0 (Take (Var 1) 1 (Let (App (AFun ''config_get_regs'' [] []) (Var 0)) (Let Unit (Let (Con [(''TIMEOUT_TIMEBASE_100_US'', (TUnit, Checked)), (''TIMEOUT_TIMEBASE_10_US'', (TUnit, Checked)), (''TIMEOUT_TIMEBASE_1_MS'', (TUnit, Unchecked)), (''TIMEOUT_TIMEBASE_1_US'', (TUnit, Checked))] ''TIMEOUT_TIMEBASE_1_MS'' (Var 0)) (Let (Promote abbreviatedType4 (Var 0)) (Let (Put (Var 3) 3 (Var 0)) (Let Unit (Let (Con [(''TIMESTAMP_TIMEBASE_100_US'', (TUnit, Checked)), (''TIMESTAMP_TIMEBASE_10_US'', (TUnit, Checked)), (''TIMESTAMP_TIMEBASE_1_MS'', (TUnit, Checked)), (''TIMESTAMP_TIMEBASE_1_US'', (TUnit, Unchecked)), (''TIMESTAMP_TIMEBASE_SYSTEM'', (TUnit, Checked))] ''TIMESTAMP_TIMEBASE_1_US'' (Var 0)) (Let (Promote abbreviatedType3 (Var 0)) (Let (Put (Var 3) 6 (Var 0)) (Let (App (AFun ''reset_timer_e'' [] []) (Var 0)) (Put (Var 12) 0 (Var 0)))))))))))))"
 
 definition
   meson_set_timeout_type :: " poly_type"
@@ -142,8 +120,8 @@ where
   "meson_stop_timer \<equiv> Take (Var 0) 0 (Let (Lit (LBool False)) (Let (Put (Var 1) 0 (Var 0)) (Let (Put (Var 3) 0 (Var 0)) (Let (Lit (LBool True)) (Put (Var 1) 1 (Var 0))))))"
 
 ML \<open>
-val Cogent_functions = ["reset_timer_e_cogent", "meson_get_time", "meson_init", "meson_set_timeout", "meson_stop_timer"]
-val Cogent_abstract_functions = ["config_get_regs", "reset_timer_e"]
+val Cogent_functions = ["reset_timer_e", "initialize", "meson_get_time", "meson_set_timeout", "meson_stop_timer"]
+val Cogent_abstract_functions = []
 \<close>
 
 end
