@@ -76,6 +76,11 @@ type Meson_timer = {
 -- assume given non-null pointers?
 initialize : Meson_timer -> Meson_timer
 initialize timer { regs } =
+    {- Original C code:
+       timer->regs->mux = TIMER_A_EN | (TIMESTAMP_TIMEBASE_1_US << TIMER_E_INPUT_CLK) 
+       |          (TIMEOUT_TIMEBASE_1_MS << TIMER_A_INPUT_CLK);
+       timer->regs->timer_e = 0;
+     -}
     timer { regs = reset_timer_e ( 
         regs { 
             -- the original C driver enables the timer A
@@ -100,6 +105,25 @@ meson_get_time timer =
   let time : U64 = ticks * ns_in_us in 
    time
 
+{- 
+
+void meson_set_timeout(meson_timer_t *timer, uint16_t timeout, bool periodic)
+{
+    if (periodic) {
+        timer->regs->mux |= TIMER_A_MODE;
+    } else {
+        timer->regs->mux &= ~TIMER_A_MODE;
+    }
+
+    timer->regs->timer_a = timeout;
+
+    // actually timer->disable is rudendant with  timer->regs->mux & TIMER_A_EN, isn't it?
+    if (timer->disable) {
+        timer->regs->mux |= TIMER_A_EN;
+        timer->disable = false;
+    }
+}
+ -}
 -- for linearity reason, this returns the timer
 meson_set_timeout : (Meson_timer, U16, Bool) -> Meson_timer
 meson_set_timeout (timer { regs }, timeout, periodic) =
@@ -109,6 +133,13 @@ meson_set_timeout (timer { regs }, timeout, periodic) =
    else 
        timer { regs = regs' } 
 
+
+{- void meson_stop_timer(meson_timer_t *timer)
+{
+    timer->regs->mux &= ~TIMER_A_EN;
+    timer->disable = true;
+}
+-}
 meson_stop_timer : Meson_timer -> Meson_timer
 meson_stop_timer timer { regs } =
    timer { regs = regs { timer_a_en = False },
