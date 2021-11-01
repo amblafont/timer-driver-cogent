@@ -22,17 +22,17 @@ record ('a, 'b, 'c, 'd, 'e, 'f, 'g) Meson_timer_reg =
   timer_e_input_clk\<^sub>f :: "'g"
 
 datatype ('a, 'b, 'c, 'd) Timeout_timebase =
-  TIMEOUT_TIMEBASE_100_US "'a"|
-  TIMEOUT_TIMEBASE_10_US "'b"|
-  TIMEOUT_TIMEBASE_1_MS "'c"|
-  TIMEOUT_TIMEBASE_1_US "'d"
+  COGENT_TIMEOUT_TIMEBASE_100_US "'a"|
+  COGENT_TIMEOUT_TIMEBASE_10_US "'b"|
+  COGENT_TIMEOUT_TIMEBASE_1_MS "'c"|
+  COGENT_TIMEOUT_TIMEBASE_1_US "'d"
 
 datatype ('a, 'b, 'c, 'd, 'e) Timestamp_timebase =
-  TIMESTAMP_TIMEBASE_100_US "'a"|
-  TIMESTAMP_TIMEBASE_10_US "'b"|
-  TIMESTAMP_TIMEBASE_1_MS "'c"|
-  TIMESTAMP_TIMEBASE_1_US "'d"|
-  TIMESTAMP_TIMEBASE_SYSTEM "'e"
+  COGENT_TIMESTAMP_TIMEBASE_100_US "'a"|
+  COGENT_TIMESTAMP_TIMEBASE_10_US "'b"|
+  COGENT_TIMESTAMP_TIMEBASE_1_MS "'c"|
+  COGENT_TIMESTAMP_TIMEBASE_1_US "'d"|
+  COGENT_TIMESTAMP_TIMEBASE_SYSTEM "'e"
 
 type_synonym  Timestamp_timebase\<^sub>T = "(unit, unit, unit, unit, unit) Timestamp_timebase"
 
@@ -41,5 +41,7 @@ type_synonym  Timeout_timebase\<^sub>T = "(unit, unit, unit, unit) Timeout_timeb
 type_synonym  Meson_timer_reg\<^sub>T = "(bool, 32 word, bool,  Timeout_timebase\<^sub>T, 32 word, 32 word,  Timestamp_timebase\<^sub>T) Meson_timer_reg"
 
 type_synonym  Meson_timer\<^sub>T = "( Meson_timer_reg\<^sub>T, bool) Meson_timer"
+
+type_synonym  TimeoutInput\<^sub>T = " Meson_timer\<^sub>T \<times> 16 word \<times> bool"
 
 end

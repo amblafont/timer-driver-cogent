@@ -19,23 +19,9 @@ where
       \<rparr>"
 
 definition
-  initialize :: " Meson_timer\<^sub>T \<Rightarrow>  Meson_timer\<^sub>T"
+  meson_get_time_cogent :: " Meson_timer\<^sub>T \<Rightarrow> 64 word"
 where
-  "initialize ds\<^sub>0 \<equiv>
-    let regs = Meson_timer.regs\<^sub>f ds\<^sub>0
-    in ds\<^sub>0
-        \<lparr>Meson_timer.regs\<^sub>f :=
-          reset_timer_e (regs \<lparr>
-            Meson_timer_reg.timer_a_input_clk\<^sub>f :=
-              (Timeout_timebase.TIMEOUT_TIMEBASE_1_MS () ::  Timeout_timebase\<^sub>T),
-            Meson_timer_reg.timer_e_input_clk\<^sub>f :=
-              (Timestamp_timebase.TIMESTAMP_TIMEBASE_1_US () ::  Timestamp_timebase\<^sub>T)
-            \<rparr>)\<rparr>"
-
-definition
-  meson_get_time :: " Meson_timer\<^sub>T \<Rightarrow> 64 word"
-where
-  "meson_get_time ds\<^sub>0 \<equiv>
+  "meson_get_time_cogent ds\<^sub>0 \<equiv>
     let initial_high = (ucast (Meson_timer_reg.timer_e_hi\<^sub>f (Meson_timer.regs\<^sub>f ds\<^sub>0)) :: 64 word);
       low = (ucast (Meson_timer_reg.timer_e\<^sub>f (Meson_timer.regs\<^sub>f ds\<^sub>0)) :: 64 word);
       high = (ucast (Meson_timer_reg.timer_e_hi\<^sub>f (Meson_timer.regs\<^sub>f ds\<^sub>0)) :: 64 word);
@@ -47,9 +33,23 @@ where
     in time"
 
 definition
-  meson_set_timeout :: " Meson_timer\<^sub>T \<times> 16 word \<times> bool \<Rightarrow>  Meson_timer\<^sub>T"
+  meson_init_cogent :: " Meson_timer\<^sub>T \<Rightarrow>  Meson_timer\<^sub>T"
 where
-  "meson_set_timeout ds\<^sub>0 \<equiv>
+  "meson_init_cogent ds\<^sub>0 \<equiv>
+    let regs = Meson_timer.regs\<^sub>f ds\<^sub>0
+    in ds\<^sub>0
+        \<lparr>Meson_timer.regs\<^sub>f :=
+          reset_timer_e (regs \<lparr>
+            Meson_timer_reg.timer_a_input_clk\<^sub>f :=
+              (Timeout_timebase.COGENT_TIMEOUT_TIMEBASE_1_MS () ::  Timeout_timebase\<^sub>T),
+            Meson_timer_reg.timer_e_input_clk\<^sub>f :=
+              (Timestamp_timebase.COGENT_TIMESTAMP_TIMEBASE_1_US () ::  Timestamp_timebase\<^sub>T)
+            \<rparr>)\<rparr>"
+
+definition
+  meson_set_timeout_cogent :: " Meson_timer\<^sub>T \<times> 16 word \<times> bool \<Rightarrow>  Meson_timer\<^sub>T"
+where
+  "meson_set_timeout_cogent ds\<^sub>0 \<equiv>
     let (ds\<^sub>1,timeout,periodic) = ds\<^sub>0;
       regs = Meson_timer.regs\<^sub>f ds\<^sub>1;
       regs' = regs \<lparr>
@@ -73,9 +73,9 @@ where
             regs'\<rparr>"
 
 definition
-  meson_stop_timer :: " Meson_timer\<^sub>T \<Rightarrow>  Meson_timer\<^sub>T"
+  meson_stop_timer_cogent :: " Meson_timer\<^sub>T \<Rightarrow>  Meson_timer\<^sub>T"
 where
-  "meson_stop_timer ds\<^sub>0 \<equiv>
+  "meson_stop_timer_cogent ds\<^sub>0 \<equiv>
     let regs = Meson_timer.regs\<^sub>f ds\<^sub>0
     in ds\<^sub>0 \<lparr>
         Meson_timer.regs\<^sub>f := regs

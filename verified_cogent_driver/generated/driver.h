@@ -13,22 +13,22 @@ enum {
     LETBANG_TRUE = 1,
 } ;
 enum tag_t {
-    TAG_ENUM_TIMEOUT_TIMEBASE_100_US,
-    TAG_ENUM_TIMEOUT_TIMEBASE_10_US,
-    TAG_ENUM_TIMEOUT_TIMEBASE_1_MS,
-    TAG_ENUM_TIMEOUT_TIMEBASE_1_US,
-    TAG_ENUM_TIMESTAMP_TIMEBASE_100_US,
-    TAG_ENUM_TIMESTAMP_TIMEBASE_10_US,
-    TAG_ENUM_TIMESTAMP_TIMEBASE_1_MS,
-    TAG_ENUM_TIMESTAMP_TIMEBASE_1_US,
-    TAG_ENUM_TIMESTAMP_TIMEBASE_SYSTEM,
+    TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_100_US,
+    TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_10_US,
+    TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_1_MS,
+    TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_1_US,
+    TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_100_US,
+    TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_10_US,
+    TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_1_MS,
+    TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_1_US,
+    TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_SYSTEM,
 } ;
 typedef enum tag_t tag_t;
 enum untyped_func_enum {
-    FUN_ENUM_initialize,
-    FUN_ENUM_meson_get_time,
-    FUN_ENUM_meson_set_timeout,
-    FUN_ENUM_meson_stop_timer,
+    FUN_ENUM_meson_get_time_cogent,
+    FUN_ENUM_meson_init_cogent,
+    FUN_ENUM_meson_set_timeout_cogent,
+    FUN_ENUM_meson_stop_timer_cogent,
     FUN_ENUM_reset_timer_e,
 } ;
 typedef enum untyped_func_enum untyped_func_enum;
@@ -45,15 +45,15 @@ typedef untyped_func_enum t57;
     {\
         switch (a2) {\
             \
-          case FUN_ENUM_initialize:\
+          case FUN_ENUM_meson_init_cogent:\
             {\
-                a1 = initialize(a3);\
+                a1 = meson_init_cogent(a3);\
                 break;\
             }\
             \
           default:\
             {\
-                a1 = meson_stop_timer(a3);\
+                a1 = meson_stop_timer_cogent(a3);\
                 break;\
             }\
         }\
@@ -63,14 +63,14 @@ typedef untyped_func_enum t58;
 #define FUN_DISP_MACRO_dispatch_t58(a1, a2, a3)\
 {\
     {\
-        a1 = meson_get_time(a3);\
+        a1 = meson_get_time_cogent(a3);\
     }\
 }
 typedef untyped_func_enum t59;
 #define FUN_DISP_MACRO_dispatch_t59(a1, a2, a3)\
 {\
     {\
-        a1 = meson_set_timeout(a3);\
+        a1 = meson_set_timeout_cogent(a3);\
     }\
 }
 typedef struct t1 t1;
@@ -80,18 +80,18 @@ typedef struct t8 t8;
 typedef struct t28 t28;
 struct t1 {
     tag_t tag;
-    unit_t TIMEOUT_TIMEBASE_100_US;
-    unit_t TIMEOUT_TIMEBASE_10_US;
-    unit_t TIMEOUT_TIMEBASE_1_MS;
-    unit_t TIMEOUT_TIMEBASE_1_US;
+    unit_t COGENT_TIMEOUT_TIMEBASE_100_US;
+    unit_t COGENT_TIMEOUT_TIMEBASE_10_US;
+    unit_t COGENT_TIMEOUT_TIMEBASE_1_MS;
+    unit_t COGENT_TIMEOUT_TIMEBASE_1_US;
 } ;
 struct t2 {
     tag_t tag;
-    unit_t TIMESTAMP_TIMEBASE_100_US;
-    unit_t TIMESTAMP_TIMEBASE_10_US;
-    unit_t TIMESTAMP_TIMEBASE_1_MS;
-    unit_t TIMESTAMP_TIMEBASE_1_US;
-    unit_t TIMESTAMP_TIMEBASE_SYSTEM;
+    unit_t COGENT_TIMESTAMP_TIMEBASE_100_US;
+    unit_t COGENT_TIMESTAMP_TIMEBASE_10_US;
+    unit_t COGENT_TIMESTAMP_TIMEBASE_1_MS;
+    unit_t COGENT_TIMESTAMP_TIMEBASE_1_US;
+    unit_t COGENT_TIMESTAMP_TIMEBASE_SYSTEM;
 } ;
 struct t3 {
     unsigned int data[20U];
@@ -106,10 +106,10 @@ struct t28 {
     bool_t p3;
 } ;
 static inline t3 *reset_timer_e(t3 *);
-static inline t8 *initialize(t8 *);
-static inline u64 meson_get_time(t8 *);
-static inline t8 *meson_set_timeout(t28);
-static inline t8 *meson_stop_timer(t8 *);
+static inline u64 meson_get_time_cogent(t8 *);
+static inline t8 *meson_init_cogent(t8 *);
+static inline t8 *meson_set_timeout_cogent(t28);
+static inline t8 *meson_stop_timer_cogent(t8 *);
 static inline t3 *dispatch_t56(untyped_func_enum a2, t3 *a3)
 {
     return reset_timer_e(a3);
@@ -118,33 +118,34 @@ static inline t8 *dispatch_t57(untyped_func_enum a2, t8 *a3)
 {
     switch (a2) {
         
-      case FUN_ENUM_initialize:
-        return initialize(a3);
+      case FUN_ENUM_meson_init_cogent:
+        return meson_init_cogent(a3);
         
       default:
-        return meson_stop_timer(a3);
+        return meson_stop_timer_cogent(a3);
     }
 }
 static inline u64 dispatch_t58(untyped_func_enum a2, t8 *a3)
 {
-    return meson_get_time(a3);
+    return meson_get_time_cogent(a3);
 }
 static inline t8 *dispatch_t59(untyped_func_enum a2, t28 a3)
 {
-    return meson_set_timeout(a3);
+    return meson_set_timeout_cogent(a3);
 }
 typedef t8 Meson_timer;
 typedef t3 Meson_timer_reg;
+typedef t28 TimeoutInput;
 typedef t1 Timeout_timebase;
 typedef t2 Timestamp_timebase;
-typedef t8 *initialize_arg;
-typedef t8 *initialize_ret;
-typedef t8 *meson_get_time_arg;
-typedef u64 meson_get_time_ret;
-typedef t28 meson_set_timeout_arg;
-typedef t8 *meson_set_timeout_ret;
-typedef t8 *meson_stop_timer_arg;
-typedef t8 *meson_stop_timer_ret;
+typedef t8 *meson_get_time_cogent_arg;
+typedef u64 meson_get_time_cogent_ret;
+typedef t8 *meson_init_cogent_arg;
+typedef t8 *meson_init_cogent_ret;
+typedef t28 meson_set_timeout_cogent_arg;
+typedef t8 *meson_set_timeout_cogent_ret;
+typedef t8 *meson_stop_timer_cogent_arg;
+typedef t8 *meson_stop_timer_cogent_ret;
 typedef t3 *reset_timer_e_arg;
 typedef t3 *reset_timer_e_ret;
 #endif

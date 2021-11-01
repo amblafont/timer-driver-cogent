@@ -10,9 +10,9 @@ imports "Driver_Shallow_Normal"
 begin
 
 overloading
-  valRel_T0 \<equiv> valRel
+  valRel_TimeoutInput \<equiv> valRel
 begin
-  definition valRel_T0: "\<And>\<xi> x v. valRel_T0 \<xi> (x :: ('t_p1, 't_p2, 't_p3) T0) v \<equiv> \<exists>f_p1 f_p2 f_p3. v = VRecord [f_p1, f_p2, f_p3] \<and> valRel \<xi> (T0.p1\<^sub>f x) f_p1 \<and> valRel \<xi> (T0.p2\<^sub>f x) f_p2 \<and> valRel \<xi> (T0.p3\<^sub>f x) f_p3"
+  definition valRel_TimeoutInput: "\<And>\<xi> x v. valRel_TimeoutInput \<xi> (x :: ('t_p1, 't_p2, 't_p3) TimeoutInput) v \<equiv> \<exists>f_p1 f_p2 f_p3. v = VRecord [f_p1, f_p2, f_p3] \<and> valRel \<xi> (TimeoutInput.p1\<^sub>f x) f_p1 \<and> valRel \<xi> (TimeoutInput.p2\<^sub>f x) f_p2 \<and> valRel \<xi> (TimeoutInput.p3\<^sub>f x) f_p3"
 end
 
 overloading
@@ -30,63 +30,63 @@ end
 overloading
   valRel_Timeout_timebase \<equiv> valRel
 begin
-  definition valRel_Timeout_timebase: "valRel_Timeout_timebase \<xi> (v :: ('a, 'b, 'c, 'd) Timeout_timebase) v' \<equiv> case_Timeout_timebase (\<lambda>x. \<exists>x'. v' = VSum ''TIMEOUT_TIMEBASE_100_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''TIMEOUT_TIMEBASE_10_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''TIMEOUT_TIMEBASE_1_MS'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''TIMEOUT_TIMEBASE_1_US'' x' \<and> valRel \<xi> x x') v"
+  definition valRel_Timeout_timebase: "valRel_Timeout_timebase \<xi> (v :: ('a, 'b, 'c, 'd) Timeout_timebase) v' \<equiv> case_Timeout_timebase (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMEOUT_TIMEBASE_100_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMEOUT_TIMEBASE_10_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMEOUT_TIMEBASE_1_MS'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMEOUT_TIMEBASE_1_US'' x' \<and> valRel \<xi> x x') v"
 end
 
 overloading
   valRel_Timestamp_timebase \<equiv> valRel
 begin
-  definition valRel_Timestamp_timebase: "valRel_Timestamp_timebase \<xi> (v :: ('a, 'b, 'c, 'd, 'e) Timestamp_timebase) v' \<equiv> case_Timestamp_timebase (\<lambda>x. \<exists>x'. v' = VSum ''TIMESTAMP_TIMEBASE_100_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''TIMESTAMP_TIMEBASE_10_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''TIMESTAMP_TIMEBASE_1_MS'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''TIMESTAMP_TIMEBASE_1_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''TIMESTAMP_TIMEBASE_SYSTEM'' x' \<and> valRel \<xi> x x') v"
+  definition valRel_Timestamp_timebase: "valRel_Timestamp_timebase \<xi> (v :: ('a, 'b, 'c, 'd, 'e) Timestamp_timebase) v' \<equiv> case_Timestamp_timebase (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMESTAMP_TIMEBASE_100_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMESTAMP_TIMEBASE_10_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMESTAMP_TIMEBASE_1_MS'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMESTAMP_TIMEBASE_1_US'' x' \<and> valRel \<xi> x x') (\<lambda>x. \<exists>x'. v' = VSum ''COGENT_TIMESTAMP_TIMEBASE_SYSTEM'' x' \<and> valRel \<xi> x x') v"
 end
 
-lemma valRel_Timeout_timebase_TIMEOUT_TIMEBASE_100_US[simp] :
-  "valRel \<xi> (Timeout_timebase.TIMEOUT_TIMEBASE_100_US x) (VSum ''TIMEOUT_TIMEBASE_100_US'' x') = valRel \<xi> x x'"
+lemma valRel_Timeout_timebase_COGENT_TIMEOUT_TIMEBASE_100_US[simp] :
+  "valRel \<xi> (Timeout_timebase.COGENT_TIMEOUT_TIMEBASE_100_US x) (VSum ''COGENT_TIMEOUT_TIMEBASE_100_US'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timeout_timebase)
   done
 
-lemma valRel_Timeout_timebase_TIMEOUT_TIMEBASE_10_US[simp] :
-  "valRel \<xi> (Timeout_timebase.TIMEOUT_TIMEBASE_10_US x) (VSum ''TIMEOUT_TIMEBASE_10_US'' x') = valRel \<xi> x x'"
+lemma valRel_Timeout_timebase_COGENT_TIMEOUT_TIMEBASE_10_US[simp] :
+  "valRel \<xi> (Timeout_timebase.COGENT_TIMEOUT_TIMEBASE_10_US x) (VSum ''COGENT_TIMEOUT_TIMEBASE_10_US'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timeout_timebase)
   done
 
-lemma valRel_Timeout_timebase_TIMEOUT_TIMEBASE_1_MS[simp] :
-  "valRel \<xi> (Timeout_timebase.TIMEOUT_TIMEBASE_1_MS x) (VSum ''TIMEOUT_TIMEBASE_1_MS'' x') = valRel \<xi> x x'"
+lemma valRel_Timeout_timebase_COGENT_TIMEOUT_TIMEBASE_1_MS[simp] :
+  "valRel \<xi> (Timeout_timebase.COGENT_TIMEOUT_TIMEBASE_1_MS x) (VSum ''COGENT_TIMEOUT_TIMEBASE_1_MS'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timeout_timebase)
   done
 
-lemma valRel_Timeout_timebase_TIMEOUT_TIMEBASE_1_US[simp] :
-  "valRel \<xi> (Timeout_timebase.TIMEOUT_TIMEBASE_1_US x) (VSum ''TIMEOUT_TIMEBASE_1_US'' x') = valRel \<xi> x x'"
+lemma valRel_Timeout_timebase_COGENT_TIMEOUT_TIMEBASE_1_US[simp] :
+  "valRel \<xi> (Timeout_timebase.COGENT_TIMEOUT_TIMEBASE_1_US x) (VSum ''COGENT_TIMEOUT_TIMEBASE_1_US'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timeout_timebase)
   done
 
-lemma valRel_Timestamp_timebase_TIMESTAMP_TIMEBASE_100_US[simp] :
-  "valRel \<xi> (Timestamp_timebase.TIMESTAMP_TIMEBASE_100_US x) (VSum ''TIMESTAMP_TIMEBASE_100_US'' x') = valRel \<xi> x x'"
+lemma valRel_Timestamp_timebase_COGENT_TIMESTAMP_TIMEBASE_100_US[simp] :
+  "valRel \<xi> (Timestamp_timebase.COGENT_TIMESTAMP_TIMEBASE_100_US x) (VSum ''COGENT_TIMESTAMP_TIMEBASE_100_US'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timestamp_timebase)
   done
 
-lemma valRel_Timestamp_timebase_TIMESTAMP_TIMEBASE_10_US[simp] :
-  "valRel \<xi> (Timestamp_timebase.TIMESTAMP_TIMEBASE_10_US x) (VSum ''TIMESTAMP_TIMEBASE_10_US'' x') = valRel \<xi> x x'"
+lemma valRel_Timestamp_timebase_COGENT_TIMESTAMP_TIMEBASE_10_US[simp] :
+  "valRel \<xi> (Timestamp_timebase.COGENT_TIMESTAMP_TIMEBASE_10_US x) (VSum ''COGENT_TIMESTAMP_TIMEBASE_10_US'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timestamp_timebase)
   done
 
-lemma valRel_Timestamp_timebase_TIMESTAMP_TIMEBASE_1_MS[simp] :
-  "valRel \<xi> (Timestamp_timebase.TIMESTAMP_TIMEBASE_1_MS x) (VSum ''TIMESTAMP_TIMEBASE_1_MS'' x') = valRel \<xi> x x'"
+lemma valRel_Timestamp_timebase_COGENT_TIMESTAMP_TIMEBASE_1_MS[simp] :
+  "valRel \<xi> (Timestamp_timebase.COGENT_TIMESTAMP_TIMEBASE_1_MS x) (VSum ''COGENT_TIMESTAMP_TIMEBASE_1_MS'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timestamp_timebase)
   done
 
-lemma valRel_Timestamp_timebase_TIMESTAMP_TIMEBASE_1_US[simp] :
-  "valRel \<xi> (Timestamp_timebase.TIMESTAMP_TIMEBASE_1_US x) (VSum ''TIMESTAMP_TIMEBASE_1_US'' x') = valRel \<xi> x x'"
+lemma valRel_Timestamp_timebase_COGENT_TIMESTAMP_TIMEBASE_1_US[simp] :
+  "valRel \<xi> (Timestamp_timebase.COGENT_TIMESTAMP_TIMEBASE_1_US x) (VSum ''COGENT_TIMESTAMP_TIMEBASE_1_US'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timestamp_timebase)
   done
 
-lemma valRel_Timestamp_timebase_TIMESTAMP_TIMEBASE_SYSTEM[simp] :
-  "valRel \<xi> (Timestamp_timebase.TIMESTAMP_TIMEBASE_SYSTEM x) (VSum ''TIMESTAMP_TIMEBASE_SYSTEM'' x') = valRel \<xi> x x'"
+lemma valRel_Timestamp_timebase_COGENT_TIMESTAMP_TIMEBASE_SYSTEM[simp] :
+  "valRel \<xi> (Timestamp_timebase.COGENT_TIMESTAMP_TIMEBASE_SYSTEM x) (VSum ''COGENT_TIMESTAMP_TIMEBASE_SYSTEM'' x') = valRel \<xi> x x'"
   apply (simp add: valRel_Timestamp_timebase)
   done
 
 lemmas valRel_records =
-  valRel_T0
-  T0.defs
+  valRel_TimeoutInput
+  TimeoutInput.defs
   valRel_Meson_timer
   Meson_timer.defs
   valRel_Meson_timer_reg
@@ -98,29 +98,29 @@ lemmas valRel_variants =
 
 context shallow begin
 
-lemma scorres_con_Timeout_timebase__TIMEOUT_TIMEBASE_1_MS :
-  "scorres x x' \<gamma> \<xi> \<Longrightarrow> scorres (Timeout_timebase.TIMEOUT_TIMEBASE_1_MS x) (Con ts ''TIMEOUT_TIMEBASE_1_MS'' x') \<gamma> \<xi>"
+lemma scorres_con_Timeout_timebase__COGENT_TIMEOUT_TIMEBASE_1_MS :
+  "scorres x x' \<gamma> \<xi> \<Longrightarrow> scorres (Timeout_timebase.COGENT_TIMEOUT_TIMEBASE_1_MS x) (Con ts ''COGENT_TIMEOUT_TIMEBASE_1_MS'' x') \<gamma> \<xi>"
   apply (erule scorres_con)
   apply simp
   done
 
-lemma scorres_con_Timestamp_timebase__TIMESTAMP_TIMEBASE_1_US :
-  "scorres x x' \<gamma> \<xi> \<Longrightarrow> scorres (Timestamp_timebase.TIMESTAMP_TIMEBASE_1_US x) (Con ts ''TIMESTAMP_TIMEBASE_1_US'' x') \<gamma> \<xi>"
+lemma scorres_con_Timestamp_timebase__COGENT_TIMESTAMP_TIMEBASE_1_US :
+  "scorres x x' \<gamma> \<xi> \<Longrightarrow> scorres (Timestamp_timebase.COGENT_TIMESTAMP_TIMEBASE_1_US x) (Con ts ''COGENT_TIMESTAMP_TIMEBASE_1_US'' x') \<gamma> \<xi>"
   apply (erule scorres_con)
   apply simp
   done
 
 lemmas scorres_cons =
-  scorres_con_Timeout_timebase__TIMEOUT_TIMEBASE_1_MS
-  scorres_con_Timestamp_timebase__TIMESTAMP_TIMEBASE_1_US
+  scorres_con_Timeout_timebase__COGENT_TIMEOUT_TIMEBASE_1_MS
+  scorres_con_Timestamp_timebase__COGENT_TIMESTAMP_TIMEBASE_1_US
 
-lemma scorres_struct_T0 :
+lemma scorres_struct_TimeoutInput :
   "\<And>\<gamma> \<xi> s_p1 s_p2 s_p3 d_p1 d_p2 d_p3.
   scorres s_p1 d_p1 \<gamma> \<xi> \<Longrightarrow>
   scorres s_p2 d_p2 \<gamma> \<xi> \<Longrightarrow>
   scorres s_p3 d_p3 \<gamma> \<xi> \<Longrightarrow>
-  scorres (T0.make s_p1 s_p2 s_p3) (Struct ts [d_p1, d_p2, d_p3]) \<gamma> \<xi>"
-  apply (clarsimp simp: scorres_def valRel_T0 T0.defs elim!: v_sem_elims)
+  scorres (TimeoutInput.make s_p1 s_p2 s_p3) (Struct ts [d_p1, d_p2, d_p3]) \<gamma> \<xi>"
+  apply (clarsimp simp: scorres_def valRel_TimeoutInput TimeoutInput.defs elim!: v_sem_elims)
   done
 
 lemma scorres_struct_Meson_timer :
@@ -145,23 +145,23 @@ lemma scorres_struct_Meson_timer_reg :
   done
 
 lemmas scorres_structs =
-  scorres_struct_T0
+  scorres_struct_TimeoutInput
   scorres_struct_Meson_timer
   scorres_struct_Meson_timer_reg
 
-lemma shallow_tac_rec_field_T0__p1 :
-  "shallow_tac_rec_field \<xi> (T0.p1\<^sub>f :: ('t_p1, 't_p2, 't_p3) T0 \<Rightarrow> 't_p1) T0.p1\<^sub>f_update 0"
-  apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_T0)
+lemma shallow_tac_rec_field_TimeoutInput__p1 :
+  "shallow_tac_rec_field \<xi> (TimeoutInput.p1\<^sub>f :: ('t_p1, 't_p2, 't_p3) TimeoutInput \<Rightarrow> 't_p1) TimeoutInput.p1\<^sub>f_update 0"
+  apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_TimeoutInput)
   done
 
-lemma shallow_tac_rec_field_T0__p2 :
-  "shallow_tac_rec_field \<xi> (T0.p2\<^sub>f :: ('t_p1, 't_p2, 't_p3) T0 \<Rightarrow> 't_p2) T0.p2\<^sub>f_update 1"
-  apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_T0)
+lemma shallow_tac_rec_field_TimeoutInput__p2 :
+  "shallow_tac_rec_field \<xi> (TimeoutInput.p2\<^sub>f :: ('t_p1, 't_p2, 't_p3) TimeoutInput \<Rightarrow> 't_p2) TimeoutInput.p2\<^sub>f_update 1"
+  apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_TimeoutInput)
   done
 
-lemma shallow_tac_rec_field_T0__p3 :
-  "shallow_tac_rec_field \<xi> (T0.p3\<^sub>f :: ('t_p1, 't_p2, 't_p3) T0 \<Rightarrow> 't_p3) T0.p3\<^sub>f_update 2"
-  apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_T0)
+lemma shallow_tac_rec_field_TimeoutInput__p3 :
+  "shallow_tac_rec_field \<xi> (TimeoutInput.p3\<^sub>f :: ('t_p1, 't_p2, 't_p3) TimeoutInput \<Rightarrow> 't_p3) TimeoutInput.p3\<^sub>f_update 2"
+  apply (fastforce intro!: shallow_tac_rec_fieldI simp: valRel_TimeoutInput)
   done
 
 lemma shallow_tac_rec_field_Meson_timer__regs :
@@ -210,9 +210,9 @@ lemma shallow_tac_rec_field_Meson_timer_reg__timer_e_input_clk :
   done
 
 lemmas scorres_rec_fields =
-  shallow_tac_rec_field_T0__p1
-  shallow_tac_rec_field_T0__p2
-  shallow_tac_rec_field_T0__p3
+  shallow_tac_rec_field_TimeoutInput__p1
+  shallow_tac_rec_field_TimeoutInput__p2
+  shallow_tac_rec_field_TimeoutInput__p3
   shallow_tac_rec_field_Meson_timer__regs
   shallow_tac_rec_field_Meson_timer__disable
   shallow_tac_rec_field_Meson_timer_reg__timer_a_en

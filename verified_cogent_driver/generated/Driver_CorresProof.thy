@@ -74,10 +74,10 @@ ML \<open>
 \<close>
 ML \<open>
 fun typing_tree_of "reset_timer_e" = reset_timer_e_typing_tree
-  | typing_tree_of "initialize" = initialize_typing_tree
-  | typing_tree_of "meson_get_time" = meson_get_time_typing_tree
-  | typing_tree_of "meson_set_timeout" = meson_set_timeout_typing_tree
-  | typing_tree_of "meson_stop_timer" = meson_stop_timer_typing_tree
+  | typing_tree_of "meson_get_time_cogent" = meson_get_time_cogent_typing_tree
+  | typing_tree_of "meson_init_cogent" = meson_init_cogent_typing_tree
+  | typing_tree_of "meson_set_timeout_cogent" = meson_set_timeout_cogent_typing_tree
+  | typing_tree_of "meson_stop_timer_cogent" = meson_stop_timer_cogent_typing_tree
   | typing_tree_of f = error ("No typing tree for " ^ quote f)
 \<close>
 ML \<open>
@@ -140,10 +140,10 @@ val Cogent_main_tree =
   |> Symtab.map (K annotate_depth)
 
 val entry_func_names = [
-      "initialize",
-      "meson_get_time",
-      "meson_set_timeout",
-      "meson_stop_timer",
+      "meson_init_cogent",
+      "meson_get_time_cogent",
+      "meson_set_timeout_cogent",
+      "meson_stop_timer_cogent",
       "reset_timer_e"
 ]
 val entry_funcs = Symtab.dest Cogent_main_tree

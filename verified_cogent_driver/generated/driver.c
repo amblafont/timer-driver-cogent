@@ -20,108 +20,108 @@ static inline void d6_set_timer_e_hi(t3 *b, u32 v)
 {
     d7_set_timer_e_hi_part0(b, (unsigned int) (v >> 0U & 4294967295U));
 }
-static inline void d11_set_timer_a_input_clk_tag_part0(t3 *b, unsigned int v)
-{
-    (*b).data[0U] = ((*b).data[0U] & ~(0X3U << 0U)) | (0X3U & v) << 0U;
-}
-static inline void d10_set_timer_a_input_clk_tag(t3 *b, unsigned int v)
-{
-    d11_set_timer_a_input_clk_tag_part0(b, (unsigned int) (v >> 0U & 3U));
-}
-static inline void d12_set_timer_a_input_clk_TIMEOUT_TIMEBASE_100_US(t3 *b,
-                                                                     unit_t v)
-{ }
-static inline void d13_set_timer_a_input_clk_TIMEOUT_TIMEBASE_10_US(t3 *b,
-                                                                    unit_t v)
-{ }
-static inline void d14_set_timer_a_input_clk_TIMEOUT_TIMEBASE_1_MS(t3 *b,
-                                                                   unit_t v)
-{ }
-static inline void d15_set_timer_a_input_clk_TIMEOUT_TIMEBASE_1_US(t3 *b,
-                                                                   unit_t v)
-{ }
-static inline void d9_set_timer_a_input_clk(t3 *b, t1 v)
-{
-    if (v.tag == TAG_ENUM_TIMEOUT_TIMEBASE_1_US) {
-        d10_set_timer_a_input_clk_tag(b, 0U);
-        d15_set_timer_a_input_clk_TIMEOUT_TIMEBASE_1_US(b,
-                                                        v.TIMEOUT_TIMEBASE_1_US);
-    } else if (v.tag == TAG_ENUM_TIMEOUT_TIMEBASE_1_MS) {
-        d10_set_timer_a_input_clk_tag(b, 3U);
-        d14_set_timer_a_input_clk_TIMEOUT_TIMEBASE_1_MS(b,
-                                                        v.TIMEOUT_TIMEBASE_1_MS);
-    } else if (v.tag == TAG_ENUM_TIMEOUT_TIMEBASE_10_US) {
-        d10_set_timer_a_input_clk_tag(b, 1U);
-        d13_set_timer_a_input_clk_TIMEOUT_TIMEBASE_10_US(b,
-                                                         v.TIMEOUT_TIMEBASE_10_US);
-    } else {
-        d10_set_timer_a_input_clk_tag(b, 2U);
-        d12_set_timer_a_input_clk_TIMEOUT_TIMEBASE_100_US(b,
-                                                          v.TIMEOUT_TIMEBASE_100_US);
-    }
-}
-static inline void d18_set_timer_e_input_clk_tag_part0(t3 *b, unsigned int v)
-{
-    (*b).data[0U] = ((*b).data[0U] & ~(0X7U << 8U)) | (0X7U & v) << 8U;
-}
-static inline void d17_set_timer_e_input_clk_tag(t3 *b, unsigned int v)
-{
-    d18_set_timer_e_input_clk_tag_part0(b, (unsigned int) (v >> 0U & 7U));
-}
-static inline void d19_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_100_US(t3 *b,
-                                                                       unit_t v)
-{ }
-static inline void d20_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_10_US(t3 *b,
-                                                                      unit_t v)
-{ }
-static inline void d21_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_1_MS(t3 *b,
-                                                                     unit_t v)
-{ }
-static inline void d22_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_1_US(t3 *b,
-                                                                     unit_t v)
-{ }
-static inline void d23_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_SYSTEM(t3 *b,
-                                                                       unit_t v)
-{ }
-static inline void d16_set_timer_e_input_clk(t3 *b, t2 v)
-{
-    if (v.tag == TAG_ENUM_TIMESTAMP_TIMEBASE_SYSTEM) {
-        d17_set_timer_e_input_clk_tag(b, 0U);
-        d23_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_SYSTEM(b,
-                                                            v.TIMESTAMP_TIMEBASE_SYSTEM);
-    } else if (v.tag == TAG_ENUM_TIMESTAMP_TIMEBASE_1_US) {
-        d17_set_timer_e_input_clk_tag(b, 1U);
-        d22_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_1_US(b,
-                                                          v.TIMESTAMP_TIMEBASE_1_US);
-    } else if (v.tag == TAG_ENUM_TIMESTAMP_TIMEBASE_1_MS) {
-        d17_set_timer_e_input_clk_tag(b, 4U);
-        d21_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_1_MS(b,
-                                                          v.TIMESTAMP_TIMEBASE_1_MS);
-    } else if (v.tag == TAG_ENUM_TIMESTAMP_TIMEBASE_10_US) {
-        d17_set_timer_e_input_clk_tag(b, 2U);
-        d20_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_10_US(b,
-                                                           v.TIMESTAMP_TIMEBASE_10_US);
-    } else {
-        d17_set_timer_e_input_clk_tag(b, 3U);
-        d19_set_timer_e_input_clk_TIMESTAMP_TIMEBASE_100_US(b,
-                                                            v.TIMESTAMP_TIMEBASE_100_US);
-    }
-}
-static inline unsigned int d25_get_timer_e_hi_part0(t3 *b)
+static inline unsigned int d10_get_timer_e_hi_part0(t3 *b)
 {
     return (*b).data[19U] >> 0U & 0XFFFFFFFFU;
 }
-static inline u32 d24_get_timer_e_hi(t3 *b)
+static inline u32 d9_get_timer_e_hi(t3 *b)
 {
-    return (u32) d25_get_timer_e_hi_part0(b) << 0U;
+    return (u32) d10_get_timer_e_hi_part0(b) << 0U;
 }
-static inline unsigned int d27_get_timer_e_part0(t3 *b)
+static inline unsigned int d12_get_timer_e_part0(t3 *b)
 {
     return (*b).data[18U] >> 0U & 0XFFFFFFFFU;
 }
-static inline u32 d26_get_timer_e(t3 *b)
+static inline u32 d11_get_timer_e(t3 *b)
 {
-    return (u32) d27_get_timer_e_part0(b) << 0U;
+    return (u32) d12_get_timer_e_part0(b) << 0U;
+}
+static inline void d15_set_timer_a_input_clk_tag_part0(t3 *b, unsigned int v)
+{
+    (*b).data[0U] = ((*b).data[0U] & ~(0X3U << 0U)) | (0X3U & v) << 0U;
+}
+static inline void d14_set_timer_a_input_clk_tag(t3 *b, unsigned int v)
+{
+    d15_set_timer_a_input_clk_tag_part0(b, (unsigned int) (v >> 0U & 3U));
+}
+static inline
+void d16_set_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_100_US(t3 *b, unit_t v)
+{ }
+static inline
+void d17_set_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_10_US(t3 *b, unit_t v)
+{ }
+static inline void d18_set_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_1_MS(t3 *b,
+                                                                          unit_t v)
+{ }
+static inline void d19_set_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_1_US(t3 *b,
+                                                                          unit_t v)
+{ }
+static inline void d13_set_timer_a_input_clk(t3 *b, t1 v)
+{
+    if (v.tag == TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_1_US) {
+        d14_set_timer_a_input_clk_tag(b, 0U);
+        d19_set_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_1_US(b,
+                                                               v.COGENT_TIMEOUT_TIMEBASE_1_US);
+    } else if (v.tag == TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_1_MS) {
+        d14_set_timer_a_input_clk_tag(b, 3U);
+        d18_set_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_1_MS(b,
+                                                               v.COGENT_TIMEOUT_TIMEBASE_1_MS);
+    } else if (v.tag == TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_10_US) {
+        d14_set_timer_a_input_clk_tag(b, 1U);
+        d17_set_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_10_US(b,
+                                                                v.COGENT_TIMEOUT_TIMEBASE_10_US);
+    } else {
+        d14_set_timer_a_input_clk_tag(b, 2U);
+        d16_set_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_100_US(b,
+                                                                 v.COGENT_TIMEOUT_TIMEBASE_100_US);
+    }
+}
+static inline void d22_set_timer_e_input_clk_tag_part0(t3 *b, unsigned int v)
+{
+    (*b).data[0U] = ((*b).data[0U] & ~(0X7U << 8U)) | (0X7U & v) << 8U;
+}
+static inline void d21_set_timer_e_input_clk_tag(t3 *b, unsigned int v)
+{
+    d22_set_timer_e_input_clk_tag_part0(b, (unsigned int) (v >> 0U & 7U));
+}
+static inline
+void d23_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_100_US(t3 *b, unit_t v)
+{ }
+static inline
+void d24_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_10_US(t3 *b, unit_t v)
+{ }
+static inline
+void d25_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_1_MS(t3 *b, unit_t v)
+{ }
+static inline
+void d26_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_1_US(t3 *b, unit_t v)
+{ }
+static inline
+void d27_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_SYSTEM(t3 *b, unit_t v)
+{ }
+static inline void d20_set_timer_e_input_clk(t3 *b, t2 v)
+{
+    if (v.tag == TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_SYSTEM) {
+        d21_set_timer_e_input_clk_tag(b, 0U);
+        d27_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_SYSTEM(b,
+                                                                   v.COGENT_TIMESTAMP_TIMEBASE_SYSTEM);
+    } else if (v.tag == TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_1_US) {
+        d21_set_timer_e_input_clk_tag(b, 1U);
+        d26_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_1_US(b,
+                                                                 v.COGENT_TIMESTAMP_TIMEBASE_1_US);
+    } else if (v.tag == TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_1_MS) {
+        d21_set_timer_e_input_clk_tag(b, 4U);
+        d25_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_1_MS(b,
+                                                                 v.COGENT_TIMESTAMP_TIMEBASE_1_MS);
+    } else if (v.tag == TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_10_US) {
+        d21_set_timer_e_input_clk_tag(b, 2U);
+        d24_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_10_US(b,
+                                                                  v.COGENT_TIMESTAMP_TIMEBASE_10_US);
+    } else {
+        d21_set_timer_e_input_clk_tag(b, 3U);
+        d23_set_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_100_US(b,
+                                                                   v.COGENT_TIMESTAMP_TIMEBASE_100_US);
+    }
 }
 static inline void d30_set_timer_a_mode_part0(t3 *b, unsigned int v)
 {
@@ -182,37 +182,41 @@ static inline unsigned int d42_get_timer_a_input_clk_tag(t3 *b)
 {
     return (unsigned int) d43_get_timer_a_input_clk_tag_part0(b) << 0U;
 }
-static inline unit_t d44_get_timer_a_input_clk_TIMEOUT_TIMEBASE_100_US(t3 *b)
+static inline
+unit_t d44_get_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_100_US(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
-static inline unit_t d45_get_timer_a_input_clk_TIMEOUT_TIMEBASE_10_US(t3 *b)
+static inline
+unit_t d45_get_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_10_US(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
-static inline unit_t d46_get_timer_a_input_clk_TIMEOUT_TIMEBASE_1_MS(t3 *b)
+static inline
+unit_t d46_get_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_1_MS(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
-static inline unit_t d47_get_timer_a_input_clk_TIMEOUT_TIMEBASE_1_US(t3 *b)
+static inline
+unit_t d47_get_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_1_US(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
 static inline t1 d41_get_timer_a_input_clk(t3 *b)
 {
     return d42_get_timer_a_input_clk_tag(b) == 0U ? (t1) {.tag =
-                                                          TAG_ENUM_TIMEOUT_TIMEBASE_1_US,
-                                                          .TIMEOUT_TIMEBASE_1_US =
-                                                          d47_get_timer_a_input_clk_TIMEOUT_TIMEBASE_1_US(b)} : d42_get_timer_a_input_clk_tag(b) ==
-        3U ? (t1) {.tag = TAG_ENUM_TIMEOUT_TIMEBASE_1_MS,
-                   .TIMEOUT_TIMEBASE_1_MS =
-                   d46_get_timer_a_input_clk_TIMEOUT_TIMEBASE_1_MS(b)} : d42_get_timer_a_input_clk_tag(b) ==
-        1U ? (t1) {.tag = TAG_ENUM_TIMEOUT_TIMEBASE_10_US,
-                   .TIMEOUT_TIMEBASE_10_US =
-                   d45_get_timer_a_input_clk_TIMEOUT_TIMEBASE_10_US(b)} : (t1) {.tag =
-                                                                                TAG_ENUM_TIMEOUT_TIMEBASE_100_US,
-                                                                                .TIMEOUT_TIMEBASE_100_US =
-                                                                                d44_get_timer_a_input_clk_TIMEOUT_TIMEBASE_100_US(b)};
+                                                          TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_1_US,
+                                                          .COGENT_TIMEOUT_TIMEBASE_1_US =
+                                                          d47_get_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_1_US(b)} : d42_get_timer_a_input_clk_tag(b) ==
+        3U ? (t1) {.tag = TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_1_MS,
+                   .COGENT_TIMEOUT_TIMEBASE_1_MS =
+                   d46_get_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_1_MS(b)} : d42_get_timer_a_input_clk_tag(b) ==
+        1U ? (t1) {.tag = TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_10_US,
+                   .COGENT_TIMEOUT_TIMEBASE_10_US =
+                   d45_get_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_10_US(b)} : (t1) {.tag =
+                                                                                       TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_100_US,
+                                                                                       .COGENT_TIMEOUT_TIMEBASE_100_US =
+                                                                                       d44_get_timer_a_input_clk_COGENT_TIMEOUT_TIMEBASE_100_US(b)};
 }
 static inline unsigned int d50_get_timer_e_input_clk_tag_part0(t3 *b)
 {
@@ -222,44 +226,49 @@ static inline unsigned int d49_get_timer_e_input_clk_tag(t3 *b)
 {
     return (unsigned int) d50_get_timer_e_input_clk_tag_part0(b) << 0U;
 }
-static inline unit_t d51_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_100_US(t3 *b)
+static inline
+unit_t d51_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_100_US(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
-static inline unit_t d52_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_10_US(t3 *b)
+static inline
+unit_t d52_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_10_US(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
-static inline unit_t d53_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_1_MS(t3 *b)
+static inline
+unit_t d53_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_1_MS(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
-static inline unit_t d54_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_1_US(t3 *b)
+static inline
+unit_t d54_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_1_US(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
-static inline unit_t d55_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_SYSTEM(t3 *b)
+static inline
+unit_t d55_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_SYSTEM(t3 *b)
 {
     return (unit_t) {.dummy = 0};
 }
 static inline t2 d48_get_timer_e_input_clk(t3 *b)
 {
     return d49_get_timer_e_input_clk_tag(b) == 0U ? (t2) {.tag =
-                                                          TAG_ENUM_TIMESTAMP_TIMEBASE_SYSTEM,
-                                                          .TIMESTAMP_TIMEBASE_SYSTEM =
-                                                          d55_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_SYSTEM(b)} : d49_get_timer_e_input_clk_tag(b) ==
-        1U ? (t2) {.tag = TAG_ENUM_TIMESTAMP_TIMEBASE_1_US,
-                   .TIMESTAMP_TIMEBASE_1_US =
-                   d54_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_1_US(b)} : d49_get_timer_e_input_clk_tag(b) ==
-        4U ? (t2) {.tag = TAG_ENUM_TIMESTAMP_TIMEBASE_1_MS,
-                   .TIMESTAMP_TIMEBASE_1_MS =
-                   d53_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_1_MS(b)} : d49_get_timer_e_input_clk_tag(b) ==
-        2U ? (t2) {.tag = TAG_ENUM_TIMESTAMP_TIMEBASE_10_US,
-                   .TIMESTAMP_TIMEBASE_10_US =
-                   d52_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_10_US(b)} : (t2) {.tag =
-                                                                                  TAG_ENUM_TIMESTAMP_TIMEBASE_100_US,
-                                                                                  .TIMESTAMP_TIMEBASE_100_US =
-                                                                                  d51_get_timer_e_input_clk_TIMESTAMP_TIMEBASE_100_US(b)};
+                                                          TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_SYSTEM,
+                                                          .COGENT_TIMESTAMP_TIMEBASE_SYSTEM =
+                                                          d55_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_SYSTEM(b)} : d49_get_timer_e_input_clk_tag(b) ==
+        1U ? (t2) {.tag = TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_1_US,
+                   .COGENT_TIMESTAMP_TIMEBASE_1_US =
+                   d54_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_1_US(b)} : d49_get_timer_e_input_clk_tag(b) ==
+        4U ? (t2) {.tag = TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_1_MS,
+                   .COGENT_TIMESTAMP_TIMEBASE_1_MS =
+                   d53_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_1_MS(b)} : d49_get_timer_e_input_clk_tag(b) ==
+        2U ? (t2) {.tag = TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_10_US,
+                   .COGENT_TIMESTAMP_TIMEBASE_10_US =
+                   d52_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_10_US(b)} : (t2) {.tag =
+                                                                                         TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_100_US,
+                                                                                         .COGENT_TIMESTAMP_TIMEBASE_100_US =
+                                                                                         d51_get_timer_e_input_clk_COGENT_TIMESTAMP_TIMEBASE_100_US(b)};
 }
 static inline t3 *reset_timer_e(t3 *a1)
 {
@@ -279,62 +288,24 @@ static inline t3 *reset_timer_e(t3 *a1)
     
     return r8;
 }
-static inline t8 *initialize(t8 *a1)
-{
-    t3 *r2 = (*a1).regs;
-    unit_t r3 = (unit_t) {.dummy = 0};
-    t1 r4;
-    
-    r4 = (t1) {.tag = TAG_ENUM_TIMEOUT_TIMEBASE_1_MS, .TIMEOUT_TIMEBASE_1_MS =
-               r3};
-    
-    t1 r5 = r4;
-    t1 r6 = r5;
-    t3 *r7 = r2;
-    
-    d9_set_timer_a_input_clk(r7, r6);
-    
-    t3 *r8 = r7;
-    unit_t r9 = (unit_t) {.dummy = 0};
-    t2 r10;
-    
-    r10 = (t2) {.tag = TAG_ENUM_TIMESTAMP_TIMEBASE_1_US,
-                .TIMESTAMP_TIMEBASE_1_US = r9};
-    
-    t2 r11 = r10;
-    t2 r12 = r11;
-    t3 *r13 = r8;
-    
-    d16_set_timer_e_input_clk(r13, r12);
-    
-    t3 *r14 = r13;
-    t3 *r15 = reset_timer_e(r14);
-    t8 *r16 = a1;
-    
-    (*r16).regs = r15;
-    
-    t8 *r17 = r16;
-    
-    return r17;
-}
-static inline u64 meson_get_time(t8 *a1)
+static inline u64 meson_get_time_cogent(t8 *a1)
 {
     t8 *r2 = a1;
     t3 *r3 = (*r2).regs;
-    u32 r4 = d24_get_timer_e_hi(r3);
+    u32 r4 = d9_get_timer_e_hi(r3);
     u64 r5 = (u64) r4;
     t3 *r6 = (*r2).regs;
-    u32 r7 = d26_get_timer_e(r6);
+    u32 r7 = d11_get_timer_e(r6);
     u64 r8 = (u64) r7;
     t3 *r9 = (*r2).regs;
-    u32 r10 = d24_get_timer_e_hi(r9);
+    u32 r10 = d9_get_timer_e_hi(r9);
     u64 r11 = (u64) r10;
     bool_t r12 = (bool_t) {.boolean = r11 != r5};
     u64 r13;
     
     if (r12.boolean) {
         t3 *r14 = (*r2).regs;
-        u32 r15 = d26_get_timer_e(r14);
+        u32 r15 = d11_get_timer_e(r14);
         u64 r16 = (u64) r15;
         u64 r17 = 32U;
         u64 r18 = r17 >= 64U ? 0U : r11 << r17;
@@ -358,7 +329,45 @@ static inline u64 meson_get_time(t8 *a1)
     
     return r28;
 }
-static inline t8 *meson_set_timeout(t28 a1)
+static inline t8 *meson_init_cogent(t8 *a1)
+{
+    t3 *r2 = (*a1).regs;
+    unit_t r3 = (unit_t) {.dummy = 0};
+    t1 r4;
+    
+    r4 = (t1) {.tag = TAG_ENUM_COGENT_TIMEOUT_TIMEBASE_1_MS,
+               .COGENT_TIMEOUT_TIMEBASE_1_MS = r3};
+    
+    t1 r5 = r4;
+    t1 r6 = r5;
+    t3 *r7 = r2;
+    
+    d13_set_timer_a_input_clk(r7, r6);
+    
+    t3 *r8 = r7;
+    unit_t r9 = (unit_t) {.dummy = 0};
+    t2 r10;
+    
+    r10 = (t2) {.tag = TAG_ENUM_COGENT_TIMESTAMP_TIMEBASE_1_US,
+                .COGENT_TIMESTAMP_TIMEBASE_1_US = r9};
+    
+    t2 r11 = r10;
+    t2 r12 = r11;
+    t3 *r13 = r8;
+    
+    d20_set_timer_e_input_clk(r13, r12);
+    
+    t3 *r14 = r13;
+    t3 *r15 = reset_timer_e(r14);
+    t8 *r16 = a1;
+    
+    (*r16).regs = r15;
+    
+    t8 *r17 = r16;
+    
+    return r17;
+}
+static inline t8 *meson_set_timeout_cogent(t28 a1)
 {
     t8 *r2 = a1.p1;
     u16 r3 = a1.p2;
@@ -412,7 +421,7 @@ static inline t8 *meson_set_timeout(t28 a1)
     
     return r21;
 }
-static inline t8 *meson_stop_timer(t8 *a1)
+static inline t8 *meson_stop_timer_cogent(t8 *a1)
 {
     t3 *r2 = (*a1).regs;
     bool_t r3 = (bool_t) {.boolean = 0U};

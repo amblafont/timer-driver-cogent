@@ -3,6 +3,6 @@
 
 t1 :=: TVariant
 t2 :=: TVariant
-t3 :=: TRecord [ReadOnly, Writable] [d35_get_timer_a_en / d33_set_timer_a_en, d37_get_timer_a / d31_set_timer_a, d39_get_timer_a_mode / d29_set_timer_a_mode, d41_get_timer_a_input_clk / d9_set_timer_a_input_clk, d26_get_timer_e / d4_set_timer_e, d24_get_timer_e_hi / d6_set_timer_e_hi, d48_get_timer_e_input_clk / d16_set_timer_e_input_clk]
-t8 :=: TRecord [ReadOnly, Writable] [_ / _, _ / _]
+t3 :=: TRecord [ReadOnly, Writable] [d35_get_timer_a_en / d33_set_timer_a_en, d37_get_timer_a / d31_set_timer_a, d39_get_timer_a_mode / d29_set_timer_a_mode, d41_get_timer_a_input_clk / d13_set_timer_a_input_clk, d11_get_timer_e / d4_set_timer_e, d9_get_timer_e_hi / d6_set_timer_e_hi, d48_get_timer_e_input_clk / d20_set_timer_e_input_clk]
+t8 :=: TRecord [Writable, ReadOnly] [_ / _, _ / _]
 t28 :=: TRecord [Unboxed]

@@ -5,35 +5,35 @@ ns_in_us : U64
 ns_in_us = 1000
 
 type Timestamp_timebase = < 
-      TIMESTAMP_TIMEBASE_SYSTEM   
-    | TIMESTAMP_TIMEBASE_1_US    
-    | TIMESTAMP_TIMEBASE_10_US  
-    | TIMESTAMP_TIMEBASE_100_US
-    | TIMESTAMP_TIMEBASE_1_MS 
+      COGENT_TIMESTAMP_TIMEBASE_SYSTEM   
+    | COGENT_TIMESTAMP_TIMEBASE_1_US    
+    | COGENT_TIMESTAMP_TIMEBASE_10_US  
+    | COGENT_TIMESTAMP_TIMEBASE_100_US
+    | COGENT_TIMESTAMP_TIMEBASE_1_MS 
     -- | DUMMY
     >
 
 layout LTimestamp_timebase = variant (3b) {
-   TIMESTAMP_TIMEBASE_SYSTEM(0) : 0b,
-   TIMESTAMP_TIMEBASE_1_US  (1) : 0b,
-   TIMESTAMP_TIMEBASE_10_US (2) : 0b,
-   TIMESTAMP_TIMEBASE_100_US(3) : 0b,
-   TIMESTAMP_TIMEBASE_1_MS  (4) : 0b
+   COGENT_TIMESTAMP_TIMEBASE_SYSTEM(0) : 0b,
+   COGENT_TIMESTAMP_TIMEBASE_1_US  (1) : 0b,
+   COGENT_TIMESTAMP_TIMEBASE_10_US (2) : 0b,
+   COGENT_TIMESTAMP_TIMEBASE_100_US(3) : 0b,
+   COGENT_TIMESTAMP_TIMEBASE_1_MS  (4) : 0b
  } at 8b
 
 type Timeout_timebase = 
-  <  TIMEOUT_TIMEBASE_1_US 
-   | TIMEOUT_TIMEBASE_10_US 
-   | TIMEOUT_TIMEBASE_100_US 
-   | TIMEOUT_TIMEBASE_1_MS 
+  <  COGENT_TIMEOUT_TIMEBASE_1_US 
+   | COGENT_TIMEOUT_TIMEBASE_10_US 
+   | COGENT_TIMEOUT_TIMEBASE_100_US 
+   | COGENT_TIMEOUT_TIMEBASE_1_MS 
 >
 
 layout LTimeout_timebase =
     variant (2b) {
-     TIMEOUT_TIMEBASE_1_US  (0) : 0b
-   , TIMEOUT_TIMEBASE_10_US (1) : 0b
-   , TIMEOUT_TIMEBASE_100_US(2) : 0b
-   , TIMEOUT_TIMEBASE_1_MS  (3) : 0b }
+     COGENT_TIMEOUT_TIMEBASE_1_US  (0) : 0b
+   , COGENT_TIMEOUT_TIMEBASE_10_US (1) : 0b
+   , COGENT_TIMEOUT_TIMEBASE_100_US(2) : 0b
+   , COGENT_TIMEOUT_TIMEBASE_1_MS  (3) : 0b }
   
 
 
@@ -74,11 +74,11 @@ type Meson_timer = {
 
 
 -- assume given non-null pointers?
-initialize : Meson_timer -> Meson_timer
-initialize timer { regs } =
+meson_init_cogent : Meson_timer -> Meson_timer
+meson_init_cogent timer { regs } =
     {- Original C code:
-       timer->regs->mux = TIMER_A_EN | (TIMESTAMP_TIMEBASE_1_US << TIMER_E_INPUT_CLK) 
-       |          (TIMEOUT_TIMEBASE_1_MS << TIMER_A_INPUT_CLK);
+       timer->regs->mux = TIMER_A_EN | (COGENT_TIMESTAMP_TIMEBASE_1_US << TIMER_E_INPUT_CLK) 
+       |          (COGENT_TIMEOUT_TIMEBASE_1_MS << TIMER_A_INPUT_CLK);
        timer->regs->timer_e = 0;
      -}
     timer { regs = reset_timer_e ( 
@@ -87,13 +87,13 @@ initialize timer { regs } =
             -- without providing an initial value, which
             -- could lead to unexpected behaviour
             -- timer_a_en = True
-               timer_a_input_clk = TIMEOUT_TIMEBASE_1_MS
-             , timer_e_input_clk = TIMESTAMP_TIMEBASE_1_US
+               timer_a_input_clk = COGENT_TIMEOUT_TIMEBASE_1_MS
+             , timer_e_input_clk = COGENT_TIMESTAMP_TIMEBASE_1_US
           })
       }
 
-meson_get_time : Meson_timer ! -> U64
-meson_get_time timer =
+meson_get_time_cogent : Meson_timer ! -> U64
+meson_get_time_cogent timer =
   let initial_high : U64 = upcast timer.regs.timer_e_hi in
   let low : U64 = upcast timer.regs.timer_e in
   let high : U64 = upcast timer.regs.timer_e_hi in
@@ -125,8 +125,9 @@ void meson_set_timeout(meson_timer_t *timer, uint16_t timeout, bool periodic)
 }
  -}
 -- for linearity reason, this returns the timer
-meson_set_timeout : (Meson_timer, U16, Bool) -> Meson_timer
-meson_set_timeout (timer { regs }, timeout, periodic) =
+type TimeoutInput = (Meson_timer, U16, Bool)
+meson_set_timeout_cogent : TimeoutInput -> Meson_timer
+meson_set_timeout_cogent (timer { regs }, timeout, periodic) =
    let regs' = regs { timer_a_mode = periodic, timer_a = upcast timeout } in       
    if timer.disable ! timer then        
        timer { regs = regs' { timer_a_en = True }, disable = False } 
@@ -140,7 +141,7 @@ meson_set_timeout (timer { regs }, timeout, periodic) =
     timer->disable = true;
 }
 -}
-meson_stop_timer : Meson_timer -> Meson_timer
-meson_stop_timer timer { regs } =
+meson_stop_timer_cogent : Meson_timer -> Meson_timer
+meson_stop_timer_cogent timer { regs } =
    timer { regs = regs { timer_a_en = False },
            disable = True }
