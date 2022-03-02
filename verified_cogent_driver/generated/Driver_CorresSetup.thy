@@ -95,6 +95,8 @@ definition state_rel :: "((funtyp, abstyp, ptrtyp) store \<times> lifted_globals
 where
   "state_rel  = {(\<sigma>, h). heap_rel \<sigma> h}"
 
+(* Proving correctness of getters *)
+local_setup \<open> local_setup_getter_correctness "driver.c" \<close>
 (* Generating the specialised take and put lemmas *)
 
 local_setup \<open> local_setup_take_put_member_case_esac_specialised_lemmas "driver.c" \<close>

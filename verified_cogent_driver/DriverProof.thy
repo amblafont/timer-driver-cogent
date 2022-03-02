@@ -3,8 +3,8 @@ theory DriverProof
  "generated/Driver_Shallow_Desugar"
 begin
 
-fun curry_triple :: "(('a, 'b, 'c) T0 \<Rightarrow> 'z) \<Rightarrow> ('a \<Rightarrow> 'b \<Rightarrow> 'c \<Rightarrow> 'z)" where
-  "curry_triple f a b c = f (\<lparr> T0.p1\<^sub>f = a, p2\<^sub>f = b, p3\<^sub>f = c \<rparr>)"
+fun curry_triple :: "(('a, 'b, 'c) TimeoutInput \<Rightarrow> 'z) \<Rightarrow> ('a \<Rightarrow> 'b \<Rightarrow> 'c \<Rightarrow> 'z)" where
+  "curry_triple f a b c = f (\<lparr> TimeoutInput.p1\<^sub>f = a, p2\<^sub>f = b, p3\<^sub>f = c \<rparr>)"
 
 
 type_synonym concr_device_state = "Meson_timer_reg\<^sub>T"
@@ -14,10 +14,10 @@ definition concr_driver :: "(concr_state, 64 word, 16 word, bool) driver"
   where
   "concr_driver = 
 \<lparr> 
-  get_time = meson_get_time,
-  initialize = initialize,
-  stop_timer = meson_stop_timer,
-  set_timeout = curry_triple meson_set_timeout,
+  get_time = meson_get_time_cogent,
+  initialize = meson_init_cogent,
+  stop_timer = meson_stop_timer_cogent,
+  set_timeout = curry_triple meson_set_timeout_cogent,
 \<comment> \<open>we are going to multiply it by 1000 (\<approx> 1024 = 2^10) \<close>
     stateInv = (\<lambda>s. timer_e_hi\<^sub>f (regs\<^sub>f s) < 2^(32-10)
              \<and>  disable\<^sub>f s = Not (timer_a_en\<^sub>f (regs\<^sub>f s)) ),
@@ -34,19 +34,19 @@ locale concr_is_refinement =
 
 fun \<alpha>timeout_timebase :: "Timeout_timebase\<^sub>T \<Rightarrow> DriverSpec.timeout_timebase"
   where 
-   "\<alpha>timeout_timebase (TIMEOUT_TIMEBASE_100_US _) = DriverSpec.TIMEOUT_TIMEBASE_1_US"
-|  "\<alpha>timeout_timebase (TIMEOUT_TIMEBASE_10_US _)  = DriverSpec.TIMEOUT_TIMEBASE_10_US"
-|  "\<alpha>timeout_timebase (TIMEOUT_TIMEBASE_1_MS _)   = DriverSpec.TIMEOUT_TIMEBASE_1_MS"
-|  "\<alpha>timeout_timebase (TIMEOUT_TIMEBASE_1_US _)   = DriverSpec.TIMEOUT_TIMEBASE_1_US"
+   "\<alpha>timeout_timebase (COGENT_TIMEOUT_TIMEBASE_100_US _) = DriverSpec.TIMEOUT_TIMEBASE_1_US"
+|  "\<alpha>timeout_timebase (COGENT_TIMEOUT_TIMEBASE_10_US _)  = DriverSpec.TIMEOUT_TIMEBASE_10_US"
+|  "\<alpha>timeout_timebase (COGENT_TIMEOUT_TIMEBASE_1_MS _)   = DriverSpec.TIMEOUT_TIMEBASE_1_MS"
+|  "\<alpha>timeout_timebase (COGENT_TIMEOUT_TIMEBASE_1_US _)   = DriverSpec.TIMEOUT_TIMEBASE_1_US"
    
    
 fun \<alpha>timestamp_timebase :: "Timestamp_timebase\<^sub>T \<Rightarrow> DriverSpec.timestamp_timebase"
   where 
-   "\<alpha>timestamp_timebase (TIMESTAMP_TIMEBASE_100_US _) = DriverSpec.TIMESTAMP_TIMEBASE_100_US"
-|  "\<alpha>timestamp_timebase (TIMESTAMP_TIMEBASE_10_US _)  = DriverSpec.TIMESTAMP_TIMEBASE_10_US"
-|  "\<alpha>timestamp_timebase (TIMESTAMP_TIMEBASE_1_MS _)   = DriverSpec.TIMESTAMP_TIMEBASE_1_MS"
-|  "\<alpha>timestamp_timebase (TIMESTAMP_TIMEBASE_1_US _)   = DriverSpec.TIMESTAMP_TIMEBASE_1_US"
-|  "\<alpha>timestamp_timebase (TIMESTAMP_TIMEBASE_SYSTEM _) = DriverSpec.TIMESTAMP_TIMEBASE_SYSTEM"
+   "\<alpha>timestamp_timebase (COGENT_TIMESTAMP_TIMEBASE_100_US _) = DriverSpec.TIMESTAMP_TIMEBASE_100_US"
+|  "\<alpha>timestamp_timebase (COGENT_TIMESTAMP_TIMEBASE_10_US _)  = DriverSpec.TIMESTAMP_TIMEBASE_10_US"
+|  "\<alpha>timestamp_timebase (COGENT_TIMESTAMP_TIMEBASE_1_MS _)   = DriverSpec.TIMESTAMP_TIMEBASE_1_MS"
+|  "\<alpha>timestamp_timebase (COGENT_TIMESTAMP_TIMEBASE_1_US _)   = DriverSpec.TIMESTAMP_TIMEBASE_1_US"
+|  "\<alpha>timestamp_timebase (COGENT_TIMESTAMP_TIMEBASE_SYSTEM _) = DriverSpec.TIMESTAMP_TIMEBASE_SYSTEM"
 
 
 definition \<alpha>_timer_mode :: "bool \<Rightarrow> timer_mode"
@@ -113,7 +113,7 @@ lemma helper2 : "
 interpretation concr_implementation:
   concr_is_refinement abstraction
   apply unfold_locales
-     apply (simp add:simp_defs meson_get_time_def ns_in_us_def)
+     apply (simp add:simp_defs meson_get_time_cogent_def ns_in_us_def)
 
      apply(case_tac s, rename_tac regs disable, case_tac regs)
      apply clarsimp
@@ -137,7 +137,7 @@ interpretation concr_implementation:
      apply simp
 
 
-    apply (simp add:simp_defs initialize_def meson_get_time_def ns_in_us_def
+    apply (simp add:simp_defs meson_init_cogent_def meson_get_time_cogent_def ns_in_us_def
   reset_timer_e_def)
      apply(case_tac s, rename_tac regs disable, case_tac regs)
     apply(simp add: take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
@@ -146,21 +146,21 @@ interpretation concr_implementation:
   apply(simp add:word_cat_def)
 
 (* yeah! *)
-     apply (simp add:simp_defs meson_stop_timer_def  ns_in_us_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
+     apply (simp add:simp_defs meson_stop_timer_cogent_def  ns_in_us_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
 
   
     
-    apply(simp add:simp_defs  meson_set_timeout_def  take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def)
+    apply(simp add:simp_defs  meson_set_timeout_cogent_def  take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def)
      apply(simp add:unat_ucast_up)
 
 (* invariants *)
-    apply(simp add:simp_defs initialize_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def reset_timer_e_def)
-     apply(simp add:simp_defs  meson_stop_timer_def  ns_in_us_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
+    apply(simp add:simp_defs meson_init_cogent_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def reset_timer_e_def)
+     apply(simp add:simp_defs  meson_stop_timer_cogent_def  ns_in_us_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
 
-    apply(simp add:simp_defs initialize_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def reset_timer_e_def)
-   apply(simp add:simp_defs  meson_stop_timer_def  ns_in_us_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
+    apply(simp add:simp_defs meson_init_cogent_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def reset_timer_e_def)
+   apply(simp add:simp_defs  meson_stop_timer_cogent_def  ns_in_us_def take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def)
 
-  apply(simp add:simp_defs  meson_set_timeout_def  take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def)
+  apply(simp add:simp_defs  meson_set_timeout_cogent_def  take\<^sub>c\<^sub>o\<^sub>g\<^sub>e\<^sub>n\<^sub>t_def Let\<^sub>d\<^sub>s_def)
   
   by(simp add: HOL.Let_def )
   
